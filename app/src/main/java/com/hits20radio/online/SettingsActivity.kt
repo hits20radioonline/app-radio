@@ -1,0 +1,5 @@
+package com.hits20radio.online
+import android.os.Bundle; import android.widget.*; import android.content.Context; import androidx.activity.ComponentActivity
+class SettingsActivity:ComponentActivity(){override fun onCreate(b:Bundle?){super.onCreate(b);val p=getSharedPreferences("radio",0);val l=LinearLayout(this);l.orientation=LinearLayout.VERTICAL;l.setPadding(20,20,20,20)
+fun e(h:String,d:String)=EditText(this).apply{hint=h;setText(p.getString(h,d))}
+val n=e("Nombre","Hits20 Radio Online");val r=e("Radio","https://stream.radiosmundiales.com:8692/stream");val v=e("Video","https://stream.radiosmundiales.com/hls/sanluismas/sanluismas.m3u8");val w=e("Web","https://hits20radioonline.com");val s=Button(this).apply{text="GUARDAR"};listOf(n,r,v,w).forEach{l.addView(it)};l.addView(s);s.setOnClickListener{p.edit().putString("Nombre",n.text.toString()).putString("Radio",r.text.toString()).putString("Video",v.text.toString()).putString("Web",w.text.toString()).apply();finish()};setContentView(l)}}
