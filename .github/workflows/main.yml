@@ -16,10 +16,10 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Forzar Gradle 8.7 sin usar caché de GitHub
+      - name: Forzar Gradle 8.13 sin usar caché de GitHub
         uses: gradle/actions/setup-gradle@v3
         with:
-          gradle-version: '8.7'
+          gradle-version: '8.13'
           cache-disabled: true
 
       - name: Compilar APK
