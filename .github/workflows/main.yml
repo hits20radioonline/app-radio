@@ -16,13 +16,14 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Crear motor Gradle 8.7 limpio
-        run: gradle wrapper --gradle-version 8.7
+      - name: Forzar Gradle 8.7 sin usar caché de GitHub
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: '8.7'
+          cache-disabled: true
 
       - name: Compilar APK
-        run: |
-          chmod +x gradlew
-          ./gradlew assembleDebug
+        run: gradle assembleDebug
 
       - name: Subir APK para descargar
         uses: actions/upload-artifact@v4
