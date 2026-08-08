@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
             settings.javaScriptEnabled = true
             settings.domStorageEnabled = true
             webViewClient = WebViewClient()
-            loadUrl("https://hits20radioonline.github.io/")
+            loadUrl("https://hits20radioonline.com/")
         }
         
         setContentView(webView)
