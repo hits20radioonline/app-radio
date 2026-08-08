@@ -6,16 +6,17 @@ import android.widget.Button
 import android.widget.SeekBar
 import android.widget.TextView
 import androidx.activity.ComponentActivity
+import com.hits20radio.online.R
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(com.hits20radio.online.R.layout.activity_main)
+        setContentView(R.layout.activity_main)
 
-        val playBtn = findViewById<Button>(com.hits20radio.online.R.id.play)
-        val statusText = findViewById<TextView>(com.hits20radio.online.R.id.status)
-        val videoBtn = findViewById<Button>(com.hits20radio.online.R.id.videoBtn)
-        val settingsBtn = findViewById<Button>(com.hits20radio.online.R.id.settings)
+        val playBtn = findViewById<Button>(R.id.play)
+        val statusText = findViewById<TextView>(R.id.status)
+        val videoBtn = findViewById<Button>(R.id.videoBtn)
+        val settingsBtn = findViewById<Button>(R.id.settings)
 
         playBtn.setOnClickListener {
             statusText.text = "TRANSMITIENDO EN VIVO..."
