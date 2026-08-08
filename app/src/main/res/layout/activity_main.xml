@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="#0B0F19">
+    android:background="@drawable/bg">
 
     <!-- Top Bar -->
     <LinearLayout
@@ -26,9 +26,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="分享"
+            android:text="🔗"
             android:textColor="#FFFFFF"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
     </LinearLayout>
 
     <!-- Logo -->
@@ -59,11 +59,10 @@
             android:textSize="12sp"/>
     </LinearLayout>
 
-    <!-- Spectrum Placeholder / Visualizer -->
+    <!-- Espacio Visualizador -->
     <View
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="#121826"
+        android:layout_height="50dp"
         android:layout_marginBottom="16dp"/>
 
     <!-- Ahora Suena Info -->
@@ -95,28 +94,6 @@
         android:textSize="13sp"
         android:layout_marginBottom="16dp"/>
 
-    <!-- Genero & Bitrate -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_marginBottom="20dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="🎵 GÉNERO: HITS"
-            android:textColor="#8FEFFF"
-            android:textSize="12sp"
-            android:layout_marginEnd="20sp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="📡 128 kbps"
-            android:textColor="#8FEFFF"
-            android:textSize="12sp"/>
-    </LinearLayout>
-
     <!-- Play / Pause Center Controls -->
     <LinearLayout
         android:layout_width="match_parent"
@@ -130,11 +107,7 @@
             android:layout_height="75dp"
             android:backgroundTint="#0088FF"
             android:text="▶"
-            android:textSize="26sp"
-            android:insetTop="0dp"
-            android:insetBottom="0dp"
-            android:insetLeft="0dp"
-            android:insetRight="0dp"/>
+            android:textSize="26sp"/>
     </LinearLayout>
 
     <!-- Volume Bar -->
@@ -166,22 +139,9 @@
             android:layout_marginStart="8dp"/>
     </LinearLayout>
 
-    <!-- Social Icons Row -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_marginBottom="20dp">
-        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="🌐 Web" android:textColor="#FFFFFF" android:textSize="12sp"/>
-        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="💬 WhatsApp" android:textColor="#FFFFFF" android:textSize="12sp"/>
-        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="📸 Instagram" android:textColor="#FFFFFF" android:textSize="12sp"/>
-        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="📘 Facebook" android:textColor="#FFFFFF" android:textSize="12sp"/>
-    </LinearLayout>
-
     <View android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1"/>
 
-    <!-- Bottom Navigation Bar (Radio / Video) -->
+    <!-- Bottom Navigation Bar -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="55dp"
