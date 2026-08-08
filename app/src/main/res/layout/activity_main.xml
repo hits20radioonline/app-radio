@@ -1,11 +1,208 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:padding="16dp" android:background="@drawable/bg">
-<ImageView android:id="@+id/logo" android:layout_width="match_parent" android:layout_height="145dp" android:src="@drawable/hits20_logo" android:scaleType="fitCenter"/>
-<TextView android:id="@+id/live" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="● EN VIVO" android:gravity="center" android:textColor="#FFFFFF" android:textStyle="bold"/>
-<TextView android:id="@+id/status" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="RADIO LISTA" android:gravity="center" android:textColor="#8FEFFF"/>
-<com.hits20radio.online.AudioSpectrumView android:id="@+id/spectrum" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1"/>
-<TextView android:id="@+id/meta" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="HITS20 RADIO ONLINE" android:gravity="center" android:textColor="#FFFFFF" android:textSize="17sp" android:textStyle="bold"/>
-<LinearLayout android:layout_width="match_parent" android:layout_height="60dp"><Button android:id="@+id/radioBtn" android:layout_width="0dp" android:layout_height="55dp" android:layout_weight="1" android:text="📻 RADIO"/><Button android:id="@+id/videoBtn" android:layout_width="0dp" android:layout_height="55dp" android:layout_weight="1" android:text="📺 VIDEO"/></LinearLayout>
-<Button android:id="@+id/play" android:layout_width="match_parent" android:layout_height="58dp" android:text="▶ ESCUCHAR HITS20"/>
-<SeekBar android:id="@+id/volume" android:layout_width="match_parent" android:layout_height="45dp" android:max="100" android:progress="85"/>
-<Button android:id="@+id/settings" android:layout_width="match_parent" android:layout_height="50dp" android:text="⚙ CONFIGURACIÓN"/>
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#0B0F19">
+
+    <!-- Top Bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="☰"
+            android:textColor="#FFFFFF"
+            android:textSize="22sp" />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="分享"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <!-- Logo -->
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:src="@drawable/hits20_logo"
+        android:scaleType="fitCenter"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- En Vivo Badge -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/badge_bg"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="4dp"
+        android:gravity="center"
+        android:layout_marginBottom="12dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="● EN VIVO"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:textSize="12sp"/>
+    </LinearLayout>
+
+    <!-- Spectrum Placeholder / Visualizer -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="#121826"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Ahora Suena Info -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="AHORA SUENA"
+        android:gravity="center"
+        android:textColor="#8A99AD"
+        android:textSize="11sp"
+        android:layout_marginBottom="4dp"/>
+    <TextView
+        android:id="@+id/songTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="HITS20 RADIO ONLINE"
+        android:gravity="center"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="2dp"/>
+    <TextView
+        android:id="@+id/songArtist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Transmisión Oficial"
+        android:gravity="center"
+        android:textColor="#B0BEC5"
+        android:textSize="13sp"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Genero & Bitrate -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="20dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🎵 GÉNERO: HITS"
+            android:textColor="#8FEFFF"
+            android:textSize="12sp"
+            android:layout_marginEnd="20sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="📡 128 kbps"
+            android:textColor="#8FEFFF"
+            android:textSize="12sp"/>
+    </LinearLayout>
+
+    <!-- Play / Pause Center Controls -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="20dp">
+        <Button
+            android:id="@+id/play"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:backgroundTint="#0088FF"
+            android:text="▶"
+            android:textSize="26sp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:insetLeft="0dp"
+            android:insetRight="0dp"/>
+    </LinearLayout>
+
+    <!-- Volume Bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="24dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🔊"
+            android:textSize="16sp"
+            android:layout_marginEnd="8dp"/>
+        <SeekBar
+            android:id="@+id/volumeBar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:max="100"
+            android:progress="80"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="80%"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            android:layout_marginStart="8dp"/>
+    </LinearLayout>
+
+    <!-- Social Icons Row -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="20dp">
+        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="🌐 Web" android:textColor="#FFFFFF" android:textSize="12sp"/>
+        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="💬 WhatsApp" android:textColor="#FFFFFF" android:textSize="12sp"/>
+        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="📸 Instagram" android:textColor="#FFFFFF" android:textSize="12sp"/>
+        <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="📘 Facebook" android:textColor="#FFFFFF" android:textSize="12sp"/>
+    </LinearLayout>
+
+    <View android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1"/>
+
+    <!-- Bottom Navigation Bar (Radio / Video) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:orientation="horizontal"
+        android:background="#05070D">
+        <Button
+            android:id="@+id/radioTab"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="📻 RADIO"
+            android:backgroundTint="#121826"
+            android:textColor="#FFFFFF"/>
+        <Button
+            android:id="@+id/videoTab"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="📺 VIDEO"
+            android:backgroundTint="#05070D"
+            android:textColor="#8A99AD"/>
+    </LinearLayout>
+
 </LinearLayout>
