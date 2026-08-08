@@ -12,17 +12,14 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:layout_marginBottom="10dp">
+        android:layout_marginBottom="6dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="☰"
             android:textColor="#FFFFFF"
             android:textSize="22sp" />
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+        <View android:layout_width="0dp" android:layout_height="0dp" android:layout_weight="1" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -31,14 +28,14 @@
             android:textSize="18sp" />
     </LinearLayout>
 
-    <!-- Logo -->
+    <!-- Logo (Asegúrate de que tu imagen en drawable se llame hits20_logo o ajústalo) -->
     <ImageView
         android:id="@+id/logo"
         android:layout_width="match_parent"
-        android:layout_height="130dp"
+        android:layout_height="110dp"
         android:src="@drawable/hits20_logo"
         android:scaleType="fitCenter"
-        android:layout_marginBottom="8dp"/>
+        android:layout_marginBottom="4dp"/>
 
     <!-- En Vivo Badge -->
     <LinearLayout
@@ -47,23 +44,24 @@
         android:layout_gravity="center"
         android:background="@drawable/badge_bg"
         android:paddingHorizontal="12dp"
-        android:paddingVertical="4dp"
+        android:paddingVertical="3dp"
         android:gravity="center"
-        android:layout_marginBottom="12dp">
+        android:layout_marginBottom="8dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="● EN VIVO"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
-            android:textSize="12sp"/>
+            android:textSize="11sp"/>
     </LinearLayout>
 
-    <!-- Espacio Visualizador -->
+    <!-- Ecualizador Visualizador -->
     <View
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginBottom="16dp"/>
+        android:layout_height="45dp"
+        android:background="#101826"
+        android:layout_marginBottom="8dp"/>
 
     <!-- Ahora Suena Info -->
     <TextView
@@ -72,8 +70,8 @@
         android:text="AHORA SUENA"
         android:gravity="center"
         android:textColor="#8A99AD"
-        android:textSize="11sp"
-        android:layout_marginBottom="4dp"/>
+        android:textSize="10sp"
+        android:layout_marginBottom="2dp"/>
     <TextView
         android:id="@+id/songTitle"
         android:layout_width="match_parent"
@@ -81,7 +79,7 @@
         android:text="HITS20 RADIO ONLINE"
         android:gravity="center"
         android:textColor="#FFFFFF"
-        android:textSize="16sp"
+        android:textSize="15sp"
         android:textStyle="bold"
         android:layout_marginBottom="2dp"/>
     <TextView
@@ -91,8 +89,30 @@
         android:text="Transmisión Oficial"
         android:gravity="center"
         android:textColor="#B0BEC5"
-        android:textSize="13sp"
-        android:layout_marginBottom="16dp"/>
+        android:textSize="12sp"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- Genero & Bitrate -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="12dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🎵 GÉNERO: HITS"
+            android:textColor="#8FEFFF"
+            android:textSize="11sp"
+            android:layout_marginEnd="16dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="📡 128 kbps"
+            android:textColor="#8FEFFF"
+            android:textSize="11sp"/>
+    </LinearLayout>
 
     <!-- Play / Pause Center Controls -->
     <LinearLayout
@@ -100,14 +120,14 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
-        android:layout_marginBottom="20dp">
+        android:layout_marginBottom="12dp">
         <Button
             android:id="@+id/play"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:backgroundTint="#0088FF"
-            android:text="▶"
-            android:textSize="26sp"/>
+            android:text="⏸"
+            android:textSize="22sp"/>
     </LinearLayout>
 
     <!-- Volume Bar -->
@@ -116,13 +136,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:layout_marginBottom="24dp">
+        android:layout_marginBottom="14dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="🔊"
-            android:textSize="16sp"
-            android:layout_marginEnd="8dp"/>
+            android:textSize="14sp"
+            android:layout_marginEnd="6dp"/>
         <SeekBar
             android:id="@+id/volumeBar"
             android:layout_width="0dp"
@@ -135,8 +155,56 @@
             android:layout_height="wrap_content"
             android:text="80%"
             android:textColor="#FFFFFF"
-            android:textSize="12sp"
-            android:layout_marginStart="8dp"/>
+            android:textSize="11sp"
+            android:layout_marginStart="6dp"/>
+    </LinearLayout>
+
+    <!-- Social Icons Row -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="8dp">
+        <Button
+            android:id="@+id/btnFacebook"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_weight="1"
+            android:text="Facebook"
+            android:textSize="10sp"
+            android:backgroundTint="#1877F2"
+            android:textColor="#FFFFFF"
+            android:layout_marginEnd="4dp"/>
+        <Button
+            android:id="@+id/btnInstagram"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_weight="1"
+            android:text="Instagram"
+            android:textSize="10sp"
+            android:backgroundTint="#E4405F"
+            android:textColor="#FFFFFF"
+            android:layout_marginEnd="4dp"/>
+        <Button
+            android:id="@+id/btnWhatsapp"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_weight="1"
+            android:text="WhatsApp"
+            android:textSize="10sp"
+            android:backgroundTint="#25D366"
+            android:textColor="#FFFFFF"
+            android:layout_marginEnd="4dp"/>
+        <Button
+            android:id="@+id/btnWeb"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_weight="1"
+            android:text="Sitio Web"
+            android:textSize="10sp"
+            android:backgroundTint="#333333"
+            android:textColor="#FFFFFF"/>
     </LinearLayout>
 
     <View android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1"/>
@@ -144,7 +212,7 @@
     <!-- Bottom Navigation Bar -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_height="50dp"
         android:orientation="horizontal"
         android:background="#05070D">
         <Button
