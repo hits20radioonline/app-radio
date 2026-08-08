@@ -10,15 +10,16 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        webView = findViewById(R.id.webView)
-        webView.settings.javaScriptEnabled = true
-        webView.settings.domStorageEnabled = true
-        webView.webViewClient = WebViewClient()
         
-        // Carga tu web de radio online directamente en la app
-        webView.loadUrl("https://hits20radioonline.github.io/")
+        // Creamos el navegador web directamente de forma segura
+        webView = WebView(this).apply {
+            settings.javaScriptEnabled = true
+            settings.domStorageEnabled = true
+            webViewClient = WebViewClient()
+            loadUrl("https://hits20radioonline.github.io/")
+        }
+        
+        setContentView(webView)
     }
 
     override fun onBackPressed() {
