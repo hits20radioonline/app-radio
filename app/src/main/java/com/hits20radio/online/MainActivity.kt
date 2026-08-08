@@ -1,32 +1,49 @@
 package com.hits20radio.online.v2
 
+import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import androidx.activity.ComponentActivity
-import com.hits20radio.online.v2.R
+import androidx.media3.common.MediaItem
+import androidx.media3.exoplayer.ExoPlayer
 
 class MainActivity : ComponentActivity() {
+    private var player: ExoPlayer? = null
+    private var isPlaying = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         val playBtn = findViewById<Button>(R.id.play)
-        val statusText = findViewById<TextView>(R.id.status)
-        val videoBtn = findViewById<Button>(R.id.videoBtn)
-        val settingsBtn = findViewById<Button>(R.id.settings)
+        val songTitle = findViewById<TextView>(R.id.songTitle)
+
+        // Inicializar ExoPlayer con el enlace de streaming de tu radio
+        player = ExoPlayer.Builder(this).build().apply {
+            val mediaItem = MediaItem.fromUri("https://stream.zeno.fm/your_stream_url") // Enlace de tu streaming
+            setMediaItem(mediaItem)
+            prepare()
+        }
 
         playBtn.setOnClickListener {
-            statusText.text = "TRANSMITIENDO EN VIVO..."
-            playBtn.text = "⏸ PAUSAR HITS20"
+            if (isPlaying) {
+                player?.pause()
+                playBtn.text = "▶"
+                songTitle.text = "PAUSADO"
+                isPlaying = false
+            } else {
+                player?.play()
+                playBtn.text = "⏸"
+                songTitle.text = "HITS20 RADIO ONLINE"
+                isPlaying = true
+            }
         }
+    }
 
-        videoBtn.setOnClickListener {
-            // Acción de video
-        }
-
-        settingsBtn.setOnClickListener {
-            // Configuración temporalmente omitida para evitar errores
-        }
+    override fun onDestroy() {
+        super.onDestroy()
+        player?.release()
+        player = null
     }
 }
