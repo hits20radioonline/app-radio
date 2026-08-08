@@ -12,7 +12,7 @@ import androidx.media3.exoplayer.ExoPlayer
 
 class MainActivity : ComponentActivity() {
     private var player: ExoPlayer? = null
-    private var isPlaying = false
+    private var isPlaying: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,9 +34,11 @@ class MainActivity : ComponentActivity() {
                 val mediaItem = MediaItem.fromUri("https://stream.radiosmundiales.com:8692/stream")
                 setMediaItem(mediaItem)
                 prepare()
-                play() // Inicia reproduciendo automáticamente
-                isPlaying = true
+                play()
             }
+            isPlaying = true
+            playBtn.text = "⏸"
+            songTitle.text = "HITS20 RADIO ONLINE"
         } catch (e: Exception) {
             e.printStackTrace()
         }
