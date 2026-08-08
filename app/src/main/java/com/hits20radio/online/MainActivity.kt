@@ -1,6 +1,5 @@
 package com.hits20radio.online.v2
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
@@ -27,8 +26,7 @@ class MainActivity : ComponentActivity() {
         }
 
         settingsBtn.setOnClickListener {
-            val intent = Intent(this, SettingsActivity::class.java)
-            startActivity(intent)
+            // Configuración temporalmente omitida para evitar errores
         }
     }
 }
