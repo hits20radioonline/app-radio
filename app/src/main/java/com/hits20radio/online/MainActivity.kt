@@ -1,6 +1,5 @@
 package com.hits20radio.online.v2
 
-import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
@@ -19,11 +18,14 @@ class MainActivity : ComponentActivity() {
         val playBtn = findViewById<Button>(R.id.play)
         val songTitle = findViewById<TextView>(R.id.songTitle)
 
-        // Inicializar ExoPlayer con el enlace de streaming de tu radio
-        player = ExoPlayer.Builder(this).build().apply {
-            val mediaItem = MediaItem.fromUri("https://stream.zeno.fm/your_stream_url") // Enlace de tu streaming
-            setMediaItem(mediaItem)
-            prepare()
+        try {
+            player = ExoPlayer.Builder(this).build().apply {
+                val mediaItem = MediaItem.fromUri("https://stream.zeno.fm/your_stream_url")
+                setMediaItem(mediaItem)
+                prepare()
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
 
         playBtn.setOnClickListener {
@@ -43,7 +45,11 @@ class MainActivity : ComponentActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        player?.release()
-        player = null
+        try {
+            player?.release()
+            player = null
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 }
