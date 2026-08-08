@@ -3,30 +3,19 @@ package com.hits20radio.online
 import android.os.Bundle
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.ComponentActivity
 
-class MainActivity : AppCompatActivity() {
-    private lateinit var webView: WebView
-
+class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         
-        // Creamos el navegador web directamente de forma segura
-        webView = WebView(this).apply {
+        val webView = WebView(this).apply {
             settings.javaScriptEnabled = true
             settings.domStorageEnabled = true
             webViewClient = WebViewClient()
-            loadUrl("https://hits20radioonline.com/")
+            loadUrl("https://hits20radioonline.com")
         }
         
         setContentView(webView)
-    }
-
-    override fun onBackPressed() {
-        if (webView.canGoBack()) {
-            webView.goBack()
-        } else {
-            super.onBackPressed()
-        }
     }
 }
