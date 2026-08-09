@@ -4,23 +4,26 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
-import android.widget.ImageButton // IMPORTACIÓN NECESARIA
+import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.SeekBar
 import android.widget.TextView
 import androidx.activity.ComponentActivity
+import androidx.media3.common.C
 import androidx.media3.common.MediaItem
 import androidx.media3.exoplayer.ExoPlayer
+import com.gauravk.audiovisualizer.visualizer.BarVisualizer
 
 class MainActivity : ComponentActivity() {
     private var player: ExoPlayer? = null
     private var isPlaying: Boolean = false
+    private var visualizer: BarVisualizer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val playBtn = findViewById<ImageButton>(R.id.play) // Ahora correcto
+        val playBtn = findViewById<ImageButton>(R.id.play)
         val songTitle = findViewById<TextView>(R.id.songTitle)
         val volumeBar = findViewById<SeekBar>(R.id.volumeBar)
         val videoTab = findViewById<Button>(R.id.videoTab)
@@ -30,17 +33,25 @@ class MainActivity : ComponentActivity() {
         val btnWhatsapp = findViewById<LinearLayout>(R.id.btnWhatsapp)
         val btnWeb = findViewById<LinearLayout>(R.id.btnWeb)
 
-        // Inicializar ExoPlayer
+        // Inicializar el Vúmetro / Visualizador dinámico
+        visualizer = findViewById(R.id.visualizer)
+
+        // Inicializar ExoPlayer y conectar el audio al visualizador
         try {
             player = ExoPlayer.Builder(this).build().apply {
                 val mediaItem = MediaItem.fromUri("https://stream.radiosmundiales.com:8692/stream")
                 setMediaItem(mediaItem)
                 prepare()
                 play()
+                
+                // Conectamos la sesión de audio del reproductor al visualizador para que se mueva al compás
+                val audioSessionId = audioSessionId
+                if (audioSessionId != C.AUDIO_SESSION_ID_UNSET) {
+                    visualizer?.setAudioSessionId(audioSessionId)
+                }
             }
             isPlaying = true
-            // Cambiado .text por .setImageResource
-            playBtn.setImageResource(R.drawable.ic_pause_circle) 
+            playBtn.setImageResource(R.drawable.ic_pause_circle)
             songTitle.text = "HITS20 RADIO ONLINE"
         } catch (e: Exception) {
             e.printStackTrace()
@@ -49,20 +60,17 @@ class MainActivity : ComponentActivity() {
         playBtn.setOnClickListener {
             if (isPlaying) {
                 player?.pause()
-                // Cambiado .text por .setImageResource
-                playBtn.setImageResource(R.drawable.ic_play_circle) 
+                playBtn.setImageResource(R.drawable.ic_play_circle)
                 songTitle.text = "PAUSADO"
                 isPlaying = false
             } else {
                 player?.play()
-                // Cambiado .text por .setImageResource
-                playBtn.setImageResource(R.drawable.ic_pause_circle) 
+                playBtn.setImageResource(R.drawable.ic_pause_circle)
                 songTitle.text = "HITS20 RADIO ONLINE"
                 isPlaying = true
             }
         }
 
-        // ... (el resto del código de volumen y redes sociales sigue igual)
         volumeBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 player?.volume = progress / 100f
@@ -83,6 +91,8 @@ class MainActivity : ComponentActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        // Liberar recursos del visualizador y reproductor
+        visualizer?.release()
         player?.release()
         player = null
     }
