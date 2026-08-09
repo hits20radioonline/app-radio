@@ -24,15 +24,13 @@
             overflow-x: hidden;
         }
 
-        /* Top Bar */
-        .top-bar {
+        header.top-bar {
             width: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        /* Logo Extra Agrandado y Centrado */
         .logo {
             width: 100%;
             max-height: 230px;
@@ -40,7 +38,6 @@
             margin: 2px 0;
         }
 
-        /* En Vivo Badge */
         .badge {
             background: linear-gradient(135deg, #FF1744, #D50000);
             padding: 2px 10px;
@@ -52,7 +49,6 @@
             margin: 2px 0;
         }
 
-        /* Vúmetro Estilo Analizador de Bloques LED (Estilo Referencia exacto) */
         .equalizer-container {
             width: 100%;
             display: flex;
@@ -76,7 +72,7 @@
         .bar-group {
             flex: 1;
             display: flex;
-            flex-direction: column-reverse; /* Los bloques se apilan desde abajo hacia arriba */
+            flex-direction: column-reverse;
             height: 100%;
             gap: 1.5px;
         }
@@ -85,21 +81,15 @@
             width: 100%;
             height: 3.5px;
             border-radius: 0.5px;
-            background-color: #0b1329; /* Apagado por defecto */
+            background-color: #0b1329;
             transition: background-color 0.08s ease;
         }
 
-        /* Colores de los bloques según la altura (Gradiente vertical LED) */
-        /* Filas inferiores: Celestes / Azules */
-        /* Filas medias: Azules brillantes / Violetas */
-        /* Filas superiores: Fucsia / Rosado / Rojo brillante */
-        
         .paused .led-block {
             background-color: #0b1329 !important;
             box-shadow: none !important;
         }
 
-        /* Reflejo inferior idéntico al estilo de la imagen */
         .equalizer-reflection {
             display: flex;
             align-items: flex-start;
@@ -113,21 +103,6 @@
             margin-top: 1px;
         }
 
-        .reflection-group {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            gap: 1.5px;
-        }
-
-        .reflection-block {
-            width: 100%;
-            height: 3.5px;
-            background-color: #00B0FF;
-        }
-
-        /* Info de reproducción */
         .info-container {
             text-align: center;
         }
@@ -145,7 +120,6 @@
             font-size: 10px;
         }
 
-        /* Género y Bitrate */
         .meta-row {
             display: flex;
             gap: 12px;
@@ -153,7 +127,6 @@
             color: #8FEFFF;
         }
 
-        /* Botón Play central */
         .play-btn {
             background: none;
             border: none;
@@ -165,7 +138,6 @@
             justify-content: center;
         }
 
-        /* Barra de Volumen */
         .volume-container {
             width: 100%;
             display: flex;
@@ -179,7 +151,6 @@
             height: 4px;
         }
 
-        /* Redes Sociales */
         .social-row {
             width: 100%;
             display: flex;
@@ -211,8 +182,7 @@
             color: #FFFFFF;
         }
 
-        /* Pestañas inferiores */
-        .bottom-nav {
+        nav.bottom-nav {
             width: calc(100% + 24px);
             height: 38px;
             background-color: #05070D;
@@ -238,89 +208,76 @@
 </head>
 <body class="paused">
 
-    <!-- Top Bar -->
-    <div class="top-bar">
+    <header class="top-bar">
         <span style="font-size: 18px;">☰</span>
         <span style="font-size: 15px;">🔗</span>
-    </div>
+    </header>
 
-    <!-- Logo -->
-    <img src="hits20_logo.png" alt="Hits 20 Logo" class="logo">
+    <main style="width: 100%; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+        <img src="hits20_logo.png" alt="Hits 20 Logo" class="logo">
 
-    <!-- En Vivo Badge -->
-    <div class="badge">● EN VIVO</div>
+        <div class="badge">● EN VIVO</div>
 
-    <!-- Vúmetro Estilo Analizador de Bloques LED con Reflejo -->
-    <div class="equalizer-container">
-        <div class="equalizer" id="eqBars">
-            <!-- Se generan dinámicamente mediante JS las columnas de bloques -->
+        <section class="equalizer-container" aria-label="Espectro de audio">
+            <div class="equalizer" id="eqBars"></div>
+            <div class="equalizer-reflection" id="eqReflections"></div>
+        </section>
+
+        <section class="info-container">
+            <div class="now-playing">ESTADO</div>
+            <h1 class="song-title" id="songTitle" style="font-size: 13px; font-weight: bold;">PAUSADO</h1>
+            <div class="song-artist">Transmisión Oficial</div>
+        </section>
+
+        <div class="meta-row">
+            <span>🎵 GÉNERO: HITS</span>
+            <span>📡 128 kbps</span>
         </div>
-        <div class="equalizer-reflection" id="eqReflections">
-            <!-- Reflejo sincronizado -->
+
+        <audio id="radioStream" preload="none" src="https://stream.radiosmundiales.com:8692/stream"></audio>
+
+        <button class="play-btn" onclick="togglePlay()" aria-label="Reproducir o Pausar">
+            <svg id="playIcon" viewBox="0 0 24 24" width="50" height="50" fill="#00E5FF">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
+            </svg>
+        </button>
+
+        <div class="volume-container">
+            <span>🔊</span>
+            <input type="range" id="volumeBar" min="0" max="100" value="80" oninput="changeVolume(this.value)" aria-label="Control de volumen">
+            <span id="volumeText" style="font-size: 9px;">80%</span>
         </div>
-    </div>
 
-    <!-- Info -->
-    <div class="info-container">
-        <div class="now-playing">ESTADO</div>
-        <div class="song-title" id="songTitle">PAUSADO</div>
-        <div class="song-artist">Transmisión Oficial</div>
-    </div>
+        <section class="social-row">
+            <a href="https://facebook.com" target="_blank" rel="noopener" class="social-item">
+                <div class="social-circle circle-fb">
+                    <svg viewBox="0 0 24 24" width="15" height="15" fill="#FFFFFF"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                </div>
+                <span>Facebook</span>
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener" class="social-item">
+                <div class="social-circle circle-ig">
+                    <svg viewBox="0 0 24 24" width="15" height="15" fill="#FFFFFF"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                </div>
+                <span>Instagram</span>
+            </a>
+            <a href="https://whatsapp.com" target="_blank" rel="noopener" class="social-item">
+                <div class="social-circle circle-wa">
+                    <svg viewBox="0 0 24 24" width="15" height="15" fill="#FFFFFF"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.096 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+                </div>
+                <span>WhatsApp</span>
+            </a>
+            <a href="https://hits20radioonline.com" target="_blank" rel="noopener" class="social-item">
+                <div class="social-circle circle-web">🌐</div>
+                <span>Sitio Web</span>
+            </a>
+        </section>
+    </main>
 
-    <!-- Género y Bitrate -->
-    <div class="meta-row">
-        <span>🎵 GÉNERO: HITS</span>
-        <span>📡 128 kbps</span>
-    </div>
-
-    <!-- Audio Stream -->
-    <audio id="radioStream" src="https://stream.radiosmundiales.com:8692/stream"></audio>
-
-    <!-- Play/Pause Button -->
-    <button class="play-btn" onclick="togglePlay()">
-        <svg id="playIcon" viewBox="0 0 24 24" width="50" height="50" fill="#00E5FF">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
-        </svg>
-    </button>
-
-    <!-- Volume Bar -->
-    <div class="volume-container">
-        <span>🔊</span>
-        <input type="range" id="volumeBar" min="0" max="100" value="80" oninput="changeVolume(this.value)">
-        <span id="volumeText" style="font-size: 9px;">80%</span>
-    </div>
-
-    <!-- Redes Sociales -->
-    <div class="social-row">
-        <a href="https://facebook.com" target="_blank" class="social-item">
-            <div class="social-circle circle-fb">
-                <svg viewBox="0 0 24 24" width="15" height="15" fill="#FFFFFF"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-            </div>
-            <span>Facebook</span>
-        </a>
-        <a href="https://instagram.com" target="_blank" class="social-item">
-            <div class="social-circle circle-ig">
-                <svg viewBox="0 0 24 24" width="15" height="15" fill="#FFFFFF"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-            </div>
-            <span>Instagram</span>
-        </a>
-        <a href="https://whatsapp.com" target="_blank" class="social-item">
-            <div class="social-circle circle-wa">
-                <svg viewBox="0 0 24 24" width="15" height="15" fill="#FFFFFF"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.096 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
-            </div>
-            <span>WhatsApp</span>
-        </a>
-        <a href="https://hits20radioonline.com" target="_blank" class="social-item">
-            <div class="social-circle circle-web">🌐</div>
-            <span>Sitio Web</span>
-        </a>
-    </div>
-
-    <!-- Bottom Navigation -->
-    <div class="bottom-nav">
+    <nav class="bottom-nav">
         <button class="tab-btn tab-active">📻 RADIO</button>
         <button class="tab-btn" onclick="window.location.href='https://hits20radioonline.com'">📺 VIDEO</button>
-    </div>
+    </nav>
 
     <script>
         const audio = document.getElementById('radioStream');
@@ -331,12 +288,10 @@
 
         audio.volume = 0.8;
 
-        // Configuración del espectro LED de bloques discretos
         const totalColumns = 32;
-        const totalRows = 12; // Número de bloques por barra vertical
+        const totalRows = 12;
         const columns = [];
 
-        // Generar estructura de bloques LED
         for (let i = 0; i < totalColumns; i++) {
             const group = document.createElement('div');
             group.className = 'bar-group';
@@ -350,7 +305,6 @@
             }
             eqBarsContainer.appendChild(group);
             
-            // Asignar patrón de frecuencias aleatorias simuladas estilo ecualizador gráfico real
             columns.push({
                 blocks: blocks,
                 height: Math.floor(Math.random() * totalRows) + 2,
@@ -364,31 +318,27 @@
         function updateEqualizer() {
             if (audio.paused) return;
 
-            columns.forEach((col, idx) => {
+            columns.forEach((col) => {
                 col.counter += 30;
                 if (col.counter >= col.speed) {
                     col.counter = 0;
-                    // Variación orgánica de altura
                     const diff = (Math.random() > 0.5 ? 1 : -1) * Math.floor(Math.random() * 3);
                     col.height = Math.min(Math.max(col.height + diff, 2), totalRows);
-                    // Ocasionales picos altos
                     if (Math.random() < 0.15) {
                         col.height = Math.floor(Math.random() * 4) + 9;
                     }
                 }
 
-                // Encender/Apagar bloques según la altura actual de la columna con colores de referencia
                 col.blocks.forEach((block, rowIndex) => {
                     if (rowIndex < col.height) {
-                        // Asignación de colores por rango de altura (Efecto LED idéntico a la foto)
                         if (rowIndex < 5) {
-                            block.style.backgroundColor = '#00B0FF'; // Azul inferior
+                            block.style.backgroundColor = '#00B0FF';
                             block.style.boxShadow = '0 0 4px rgba(0, 176, 255, 0.6)';
                         } else if (rowIndex < 9) {
-                            block.style.backgroundColor = '#7C4DFF'; // Violeta medio
+                            block.style.backgroundColor = '#7C4DFF';
                             block.style.boxShadow = '0 0 4px rgba(124, 77, 255, 0.6)';
                         } else {
-                            block.style.backgroundColor = '#FF1744'; // Fucsia/Rojo superior (Picos)
+                            block.style.backgroundColor = '#FF1744';
                             block.style.boxShadow = '0 0 6px rgba(255, 23, 68, 0.8)';
                         }
                     } else {
@@ -408,6 +358,13 @@
                     if (!animationInterval) {
                         animationInterval = setInterval(updateEqualizer, 65);
                     }
+                    if ('mediaSession' in navigator) {
+                        navigator.mediaSession.metadata = new MediaMetadata({
+                            title: 'Hits20 Radio Online',
+                            artist: 'Transmisión Oficial',
+                            album: 'En Vivo'
+                        });
+                    }
                 }).catch(error => {
                     console.log("Error al reproducir el streaming:", error);
                 });
@@ -417,7 +374,6 @@
                 songTitle.innerText = "PAUSADO";
                 playIcon.innerHTML = '<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>';
                 
-                // Apagar todos los bloques visualmente
                 columns.forEach(col => {
                     col.blocks.forEach(block => {
                         block.style.backgroundColor = '#0b1329';
