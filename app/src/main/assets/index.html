@@ -1,1 +1,328 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hits 20 Radio Online</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background-color: #05070D;
+            color: white;
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            height: 100vh;
+            padding: 16px;
+            overflow: hidden;
+        }
 
+        /* Top Bar */
+        .top-bar {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+
+        /* Logo */
+        .logo {
+            width: 100%;
+            height: 100px;
+            object-fit: contain;
+            margin-bottom: 4px;
+        }
+
+        /* En Vivo Badge */
+        .badge {
+            background: linear-gradient(135deg, #FF1744, #D50000);
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 11sp;
+            font-weight: bold;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+            box-shadow: 0 0 10px rgba(255, 23, 68, 0.4);
+        }
+
+        /* Vúmetro Animado Moderno */
+        .equalizer {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            height: 45px;
+            gap: 4px;
+            width: 100%;
+            background: #101826;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            padding: 5px;
+        }
+        .bar {
+            width: 6px;
+            background: linear-gradient(to top, #00B0FF, #00E5FF, #7C4DFF);
+            border-radius: 3px;
+            animation: bounce 1.2s infinite ease-in-out;
+        }
+        .bar:nth-child(1) { animation-delay: 0.1s; }
+        .bar:nth-child(2) { animation-delay: 0.3s; }
+        .bar:nth-child(3) { animation-delay: 0.5s; }
+        .bar:nth-child(4) { animation-delay: 0.2s; }
+        .bar:nth-child(5) { animation-delay: 0.6s; }
+        .bar:nth-child(6) { animation-delay: 0.4s; }
+        .bar:nth-child(7) { animation-delay: 0.25s; }
+        .bar:nth-child(8) { animation-delay: 0.55s; }
+
+        @keyframes bounce {
+            0%, 100% { height: 8px; }
+            50% { height: 38px; }
+        }
+
+        /* Estado pausado */
+        .paused .bar {
+            animation-play-state: paused;
+            height: 6px;
+        }
+
+        /* Info de reproducción */
+        .info-container {
+            text-align: center;
+            margin-bottom: 12px;
+        }
+        .now-playing {
+            color: #8A99AD;
+            font-size: 10px;
+            margin-bottom: 2px;
+            letter-spacing: 1px;
+        }
+        .song-title {
+            font-size: 15px;
+            font-weight: bold;
+            margin-bottom: 2px;
+        }
+        .song-artist {
+            color: #B0BEC5;
+            font-size: 12px;
+        }
+
+        /* Género y Bitrate */
+        .meta-row {
+            display: flex;
+            gap: 16px;
+            font-size: 11px;
+            color: #8FEFFF;
+            margin-bottom: 16px;
+        }
+
+        /* Botón Play central */
+        .play-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            width: 75px;
+            height: 75px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .play-btn img {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Barra de Volumen */
+        .volume-container {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+            padding: 0 10px;
+        }
+        .volume-container input[type=range] {
+            flex: 1;
+            accent-color: #00E5FF;
+        }
+
+        /* Redes Sociales */
+        .social-row {
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 12px;
+        }
+        .social-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
+        }
+        .social-circle {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 20px;
+            margin-bottom: 4px;
+        }
+        .circle-fb { background-color: #1877F2; font-size: 24px; }
+        .circle-ig { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #df5950 45%, #c62368 60%, #515ec4 90%); }
+        .circle-wa { background-color: #25D366; }
+        .circle-web { background-color: #121826; border: 1px solid #00E5FF; }
+        .social-item span {
+            font-size: 11px;
+            color: #FFFFFF;
+        }
+
+        /* Pestañas inferiores */
+        .bottom-nav {
+            width: calc(100% + 32px);
+            height: 50px;
+            background-color: #05070D;
+            display: flex;
+            margin: 0 -16px -16px -16px;
+        }
+        .tab-btn {
+            flex: 1;
+            background: none;
+            border: none;
+            color: #8A99AD;
+            font-weight: bold;
+            font-size: 13px;
+            cursor: pointer;
+        }
+        .tab-active {
+            background-color: #121826;
+            color: #FFFFFF;
+        }
+
+        audio { display: none; }
+    </style>
+</head>
+<body>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <span style="font-size: 22px;">☰</span>
+        <span style="font-size: 18px;">🔗</span>
+    </div>
+
+    <!-- Logo -->
+    <img src="hits20_logo.png" alt="Hits 20 Logo" class="logo">
+
+    <!-- En Vivo Badge -->
+    <div class="badge">● EN VIVO</div>
+
+    <!-- Vúmetro / Ecualizador Animado -->
+    <div class="equalizer" id="eqContainer">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+
+    <!-- Info -->
+    <div class="info-container">
+        <div class="now-playing">AHORA SUENA</div>
+        <div class="song-title" id="songTitle">HITS20 RADIO ONLINE</div>
+        <div class="song-artist">Transmisión Oficial</div>
+    </div>
+
+    <!-- Género y Bitrate -->
+    <div class="meta-row">
+        <span>🎵 GÉNERO: HITS</span>
+        <span>📡 128 kbps</span>
+    </div>
+
+    <!-- Audio Player Oculto -->
+    <audio id="radioStream" src="https://stream.radiosmundiales.com:8692/stream" autoplay></audio>
+
+    <!-- Play/Pause Button -->
+    <button class="play-btn" onclick="togglePlay()">
+        <svg id="playIcon" viewBox="0 0 24 24" width="75" height="75" fill="#00E5FF">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/>
+        </svg>
+    </button>
+
+    <!-- Volume Bar -->
+    <div class="volume-container">
+        <span>🔊</span>
+        <input type="range" id="volumeBar" min="0" max="100" value="80" oninput="changeVolume(this.value)">
+        <span id="volumeText" style="font-size: 11px;">80%</span>
+    </div>
+
+    <!-- Redes Sociales -->
+    <div class="social-row">
+        <a href="https://facebook.com" target="_blank" class="social-item">
+            <div class="social-circle circle-fb">f</div>
+            <span>Facebook</span>
+        </a>
+        <a href="https://instagram.com" target="_blank" class="social-item">
+            <div class="social-circle circle-ig">📷</div>
+            <span>Instagram</span>
+        </a>
+        <a href="https://whatsapp.com" target="_blank" class="social-item">
+            <div class="social-circle circle-wa">💬</div>
+            <span>WhatsApp</span>
+        </a>
+        <a href="https://hits20radioonline.com" target="_blank" class="social-item">
+            <div class="social-circle circle-web">🌐</div>
+            <span>Sitio Web</span>
+        </a>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <button class="tab-btn tab-active">📻 RADIO</button>
+        <button class="tab-btn" onclick="window.location.href='https://hits20radioonline.com'">📺 VIDEO</button>
+    </div>
+
+    <script>
+        const audio = document.getElementById('radioStream');
+        const eqContainer = document.getElementById('eqContainer');
+        const playIcon = document.getElementById('playIcon');
+        const volumeText = document.getElementById('volumeText');
+        const songTitle = document.getElementById('songTitle');
+
+        let isPlaying = true;
+
+        function togglePlay() {
+            if (audio.paused) {
+                audio.play();
+                eqContainer.classList.remove('paused');
+                songTitle.innerText = "HITS20 RADIO ONLINE";
+                playIcon.innerHTML = '<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/>'; // Pausa icon
+                isPlaying = true;
+            } else {
+                audio.pause();
+                eqContainer.classList.add('paused');
+                songTitle.innerText = "PAUSADO";
+                playIcon.innerHTML = '<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>'; // Play icon
+                isPlaying = false;
+            }
+        }
+
+        function changeVolume(val) {
+            audio.volume = val / 100;
+            volumeText.innerText = val + "%";
+        }
+    </script>
+</body>
+</html>
