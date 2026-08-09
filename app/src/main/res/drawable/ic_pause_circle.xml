@@ -3,13 +3,19 @@
     android:height="75dp"
     android:viewportWidth="100"
     android:viewportHeight="100">
-    <path
-        android:fillColor="#1A85E3" <!-- Color azul del círculo -->
-        android:pathData="M50,0C77.6,0 100,22.4 100,50c0,27.6 -22.4,50 -50,50S0,77.6 0,50C0,22.4 22.4,0 50,0z"/>
-    <path
-        android:fillColor="#FFFFFF" <!-- Color blanco de las barras -->
-        android:pathData="M37.5,30h7.5c1.4,0 2.5,1.1 2.5,2.5v35c0,1.4 -1.1,2.5 -2.5,2.5h-7.5c-1.4,0 -2.5,-1.1 -2.5,-2.5v-35C35,31.1 36.1,30 37.5,30z"/>
-    <path
-        android:fillColor="#FFFFFF"
-        android:pathData="M55,30h7.5c1.4,0 2.5,1.1 2.5,2.5v35c0,1.4 -1.1,2.5 -2.5,2.5h-7.5c-1.4,0 -2.5,-1.1 -2.5,-2.5v-35C52.5,31.1 53.6,30 55,30z"/>
+  
+  <!-- El Círculo Azul -->
+  <path
+      android:fillColor="#1A85E3"
+      android:pathData="M50,0C77.6,0 100,22.4 100,50c0,27.6 -22.4,50 -50,50S0,77.6 0,50C0,22.4 22.4,0 50,0z"/>
+  
+  <!-- La barra de pausa izquierda -->
+  <path
+      android:fillColor="#FFFFFF"
+      android:pathData="M37.5,30h7.5c1.4,0 2.5,1.1 2.5,2.5v35c0,1.4 -1.1,2.5 -2.5,2.5h-7.5c-1.4,0 -2.5,-1.1 -2.5,-2.5v-35C35,31.1 36.1,30 37.5,30z"/>
+  
+  <!-- La barra de pausa derecha -->
+  <path
+      android:fillColor="#FFFFFF"
+      android:pathData="M55,30h7.5c1.4,0 2.5,1.1 2.5,2.5v35c0,1.4 -1.1,2.5 -2.5,2.5h-7.5c-1.4,0 -2.5,-1.1 -2.5,-2.5v-35C52.5,31.1 53.6,30 55,30z"/>
 </vector>
