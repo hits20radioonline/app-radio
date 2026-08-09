@@ -1,1 +1,16 @@
-
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="75dp"
+    android:height="75dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+  
+    <!-- El Círculo Azul -->
+    <path
+        android:fillColor="#1A85E3"
+        android:pathData="M50,0C77.6,0 100,22.4 100,50c0,27.6 -22.4,50 -50,50S0,77.6 0,50C0,22.4 22.4,0 50,0z"/>
+  
+    <!-- El triángulo de Play -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M40,30l30,20l-30,20z"/>
+</vector>
