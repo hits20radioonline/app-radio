@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.SeekBar
 import android.widget.TextView
 import androidx.activity.ComponentActivity
@@ -23,10 +24,10 @@ class MainActivity : ComponentActivity() {
         val volumeBar = findViewById<SeekBar>(R.id.volumeBar)
         val videoTab = findViewById<Button>(R.id.videoTab)
         
-        val btnFacebook = findViewById<Button>(R.id.btnFacebook)
-        val btnInstagram = findViewById<Button>(R.id.btnInstagram)
-        val btnWhatsapp = findViewById<Button>(R.id.btnWhatsapp)
-        val btnWeb = findViewById<Button>(R.id.btnWeb)
+        val btnFacebook = findViewById<LinearLayout>(R.id.btnFacebook)
+        val btnInstagram = findViewById<LinearLayout>(R.id.btnInstagram)
+        val btnWhatsapp = findViewById<LinearLayout>(R.id.btnWhatsapp)
+        val btnWeb = findViewById<LinearLayout>(R.id.btnWeb)
 
         // Inicializar ExoPlayer con tu URL oficial
         try {
