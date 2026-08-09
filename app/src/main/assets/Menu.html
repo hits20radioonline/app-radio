@@ -1,1 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú - Hits 20 Radio</title>
+    <style>
+        body {
+            background-color: #030508;
+            color: white;
+            font-family: sans-serif;
+            padding: 20px;
+            max-width: 420px;
+            margin: 0 auto;
+        }
 
+        h2 { color: #00E5FF; margin-bottom: 20px; font-size: 18px; border-bottom: 1px solid #121d33; padding-bottom: 10px; }
+
+        .menu-column { display: flex; flex-direction: column; gap: 15px; }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+
+        .menu-item:hover { background-color: #0e1726; }
+
+        .menu-item svg { width: 24px; height: 24px; fill: #00E5FF; }
+
+        .section-title { font-size: 14px; color: #8A99AD; margin-top: 20px; margin-bottom: 10px; text-transform: uppercase; }
+    </style>
+</head>
+<body>
+
+    <h2>Menú</h2>
+
+    <div class="section-title">Redes Sociales</div>
+    <div class="menu-column">
+        <a href="https://www.youtube.com/@hits20radio" class="menu-item" target="_blank">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.377.505 9.377.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            YouTube
+        </a>
+        <a href="https://www.tiktok.com/@hits20online?_r=1&_t=ZS-980S8qdbZa9" class="menu-item" target="_blank">
+            <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.77 0 2.89 2.89 0 0 1 2.5-2.87V9.75a6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.34-6.34V6.69a6.6 6.6 0 0 0 3.69 1.1v-3.5a4.7 4.7 0 0 1-3.69-1.1z"/></svg>
+            TikTok
+        </a>
+        <a href="https://www.threads.com/@hits20online" class="menu-item" target="_blank">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6z"/></svg>
+            Threads
+        </a>
+    </div>
+
+    <div class="section-title">Información</div>
+    <div class="menu-column">
+        <a href="#" class="menu-item">
+            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            Contacto
+        </a>
+        <a href="#" class="menu-item">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+            Acerca de
+        </a>
+    </div>
+
+</body>
+</html>
