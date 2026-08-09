@@ -4,90 +4,429 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hits 20 Radio Online v3</title>
+    <link rel="manifest" href="manifest.json">
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background-color: #030508; color: white; font-family: sans-serif; display: flex; flex-direction: column; align-items: center; min-height: 100vh; padding: 8px 12px; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background-color: #030508;
+            color: white;
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 100vh;
+            height: 100%;
+            padding: 8px 12px;
+            overflow-x: hidden;
+        }
 
-        /* Estilos del Menú Lateral */
+        header.top-bar {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .logo {
+            width: 100%;
+            max-height: 190px;
+            object-fit: contain;
+            margin: 2px 0;
+        }
+
+        .badge {
+            background: linear-gradient(135deg, #FF1744, #D50000);
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 9px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            box-shadow: 0 0 10px rgba(255, 23, 68, 0.5);
+            margin: 2px 0;
+        }
+
+        .equalizer-wrapper {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 70px;
+            position: relative;
+            margin: 2px 0;
+        }
+
+        .cyber-equalizer {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+            width: 100%;
+            height: 100%;
+        }
+
+        .cyber-bar {
+            width: 6px;
+            background: linear-gradient(180deg, #FF1744, #7C4DFF, #00E5FF);
+            border-radius: 4px;
+            transition: height 0.04s ease, box-shadow 0.04s ease;
+            box-shadow: 0 0 8px rgba(0, 229, 255, 0.4);
+        }
+
+        .paused .cyber-bar {
+            height: 4px !important;
+            background: #0d162d !important;
+            box-shadow: none !important;
+        }
+
+        .info-container {
+            text-align: center;
+        }
+        .now-playing {
+            color: #8A99AD;
+            font-size: 8px;
+            letter-spacing: 1px;
+        }
+        .song-title {
+            font-size: 13px;
+            font-weight: bold;
+        }
+        .song-artist {
+            color: #B0BEC5;
+            font-size: 10px;
+        }
+
+        .meta-row {
+            display: flex;
+            gap: 12px;
+            font-size: 9px;
+            color: #8FEFFF;
+        }
+
+        .play-btn {
+            background: radial-gradient(circle, rgba(0,229,255,0.15) 0%, rgba(5,7,13,0.8) 70%);
+            border: 2px solid #00E5FF;
+            border-radius: 50%;
+            cursor: pointer;
+            width: 74px;
+            height: 74px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.3), inset 0 0 10px rgba(0, 229, 255, 0.2);
+            transition: transform 0.1s ease, box-shadow 0.1s ease;
+        }
+        .play-btn:active {
+            transform: scale(0.94);
+            box-shadow: 0 0 10px rgba(0, 229, 255, 0.6);
+        }
+
+        .volume-container {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0 10px;
+        }
+        .volume-container input[type=range] {
+            flex: 1;
+            accent-color: #00E5FF;
+            height: 4px;
+        }
+
+        .social-row {
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+        }
+        .social-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
+        }
+        .social-circle {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2px;
+        }
+        .circle-fb { background-color: #1877F2; }
+        .circle-ig { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #df5950 45%, #c62368 60%, #515ec4 90%); }
+        .circle-wa { background-color: #25D366; }
+        .circle-web { background-color: #121826; border: 1px solid #00E5FF; }
+        .social-item span {
+            font-size: 9px;
+            color: #FFFFFF;
+        }
+
         .side-menu {
-            position: fixed; top: 0; left: -260px; width: 260px; height: 100%;
-            background-color: #05080f; border-right: 1px solid #121d33;
-            z-index: 1000; display: flex; flex-direction: column; transition: left 0.3s ease;
+            position: fixed;
+            top: 0;
+            left: -260px;
+            width: 260px;
+            height: 100%;
+            background-color: #05080f;
+            border-right: 1px solid #121d33;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            transition: left 0.3s ease;
+            box-shadow: 5px 0 15px rgba(0,0,0,0.5);
         }
-        .side-menu.open { left: 0; }
-        .menu-header { padding: 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #121d33; color: #00E5FF; font-weight: bold; }
-        .menu-items { display: flex; flex-direction: column; padding: 16px 0; overflow-y: auto; max-height: calc(100vh - 60px); }
-        .menu-item { padding: 12px 16px; color: #8A99AD; text-decoration: none; font-size: 13px; display: flex; align-items: center; gap: 10px; cursor: pointer; }
-        .menu-item:hover { background-color: #0e1726; color: #00E5FF; }
+        .side-menu.open {
+            left: 0;
+        }
+        .menu-header {
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #121d33;
+            font-weight: bold;
+            color: #00E5FF;
+        }
+        .menu-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        .menu-items {
+            display: flex;
+            flex-direction: column;
+            padding: 16px 0;
+            gap: 4px;
+            overflow-y: auto;
+            max-height: calc(100vh - 60px);
+        }
+        .menu-item {
+            padding: 10px 16px;
+            color: #8A99AD;
+            text-decoration: none;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: background 0.2s, color 0.2s;
+            cursor: pointer;
+        }
+        .menu-item:hover {
+            background-color: #0e1726;
+            color: #00E5FF;
+        }
 
-        /* Sección Redes en Menú */
-        .menu-section-title { padding: 16px 16px 8px 16px; font-size: 10px; color: #00E5FF; letter-spacing: 1px; font-weight: bold; }
-        .menu-social-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 0 16px 16px 16px; }
-        .menu-social-btn { display: flex; flex-direction: column; align-items: center; text-decoration: none; color: #8A99AD; font-size: 8px; gap: 5px; }
-        .menu-social-circle { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: #121826; border: 1px solid #1f2a40; font-size: 12px; font-weight: bold; color: #00E5FF; }
+        /* Estilos de la nueva sección Redes en el Menú */
+        .menu-section-title {
+            padding: 12px 16px 6px 16px;
+            font-size: 10px;
+            color: #00E5FF;
+            letter-spacing: 1px;
+            font-weight: bold;
+        }
+        .menu-social-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            padding: 0 16px 12px 16px;
+        }
+        .menu-social-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #8A99AD;
+            font-size: 8px;
+            gap: 4px;
+        }
+        .menu-social-circle {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #121826;
+            border: 1px solid #1f2a40;
+            font-size: 12px;
+            font-weight: bold;
+            color: #00E5FF;
+            transition: border-color 0.2s;
+        }
+        .menu-social-btn:hover .menu-social-circle {
+            border-color: #00E5FF;
+        }
 
-        .menu-overlay, .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 999; display: none; }
-        .menu-overlay.open, .modal-overlay.open { display: block; }
+        .menu-overlay, .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 999;
+            display: none;
+        }
+        .menu-overlay.open, .modal-overlay.open {
+            display: block;
+        }
 
-        /* Estilos de la Ventana Flotante (Modal de Contacto) */
+        /* Ventana flotante (Modal) de Contacto */
         .contact-modal {
-            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.9);
-            width: 90%; max-width: 400px; background-color: #080d1a; border: 1px solid #00E5FF;
-            border-radius: 12px; z-index: 1001; padding: 20px; display: none;
-            box-shadow: 0 0 25px rgba(0, 229, 255, 0.3); opacity: 0; transition: all 0.3s ease;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            width: 90%;
+            max-width: 380px;
+            background-color: #05080f;
+            border: 1px solid #00E5FF;
+            border-radius: 12px;
+            z-index: 1001;
+            padding: 16px;
+            display: none;
+            box-shadow: 0 0 25px rgba(0, 229, 255, 0.3);
+            opacity: 0;
+            transition: all 0.3s ease;
         }
-        .contact-modal.open { display: block; opacity: 1; transform: translate(-50%, -50%) scale(1); }
-        .contact-modal h3 { color: #00E5FF; font-size: 15px; margin-bottom: 15px; text-align: center; letter-spacing: 1px; }
-        
-        .form-group { margin-bottom: 10px; display: flex; flex-direction: column; gap: 4px; }
-        .form-group label { font-size: 10px; color: #8A99AD; }
+        .contact-modal.open {
+            display: block;
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+        .contact-modal h3 {
+            color: #00E5FF;
+            font-size: 14px;
+            margin-bottom: 12px;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+        .form-group {
+            margin-bottom: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+        .form-group label {
+            font-size: 9px;
+            color: #8A99AD;
+        }
         .form-group input, .form-group textarea {
-            background-color: #030508; border: 1px solid #1f2a40; border-radius: 6px;
-            color: white; padding: 8px; font-size: 12px; outline: none;
+            background-color: #030508;
+            border: 1px solid #1f2a40;
+            border-radius: 5px;
+            color: white;
+            padding: 6px 8px;
+            font-size: 11px;
+            outline: none;
         }
-        .form-group input:focus, .form-group textarea:focus { border-color: #00E5FF; }
-        .form-group textarea { resize: none; height: 70px; }
-        
-        .char-counter { font-size: 9px; color: #8A99AD; text-align: right; }
-        
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: #00E5FF;
+        }
+        .form-group textarea {
+            resize: none;
+            height: 60px;
+        }
+        .char-counter {
+            font-size: 8px;
+            color: #8A99AD;
+            text-align: right;
+        }
         .submit-btn {
-            width: 100%; background: linear-gradient(135deg, #00E5FF, #00838F);
-            color: #030508; border: none; padding: 10px; border-radius: 6px;
-            font-weight: bold; font-size: 12px; cursor: pointer; margin-top: 5px;
+            width: 100%;
+            background: linear-gradient(135deg, #00E5FF, #00838F);
+            color: #030508;
+            border: none;
+            padding: 9px;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 11px;
+            cursor: pointer;
+            margin-top: 4px;
             transition: opacity 0.2s;
         }
-        .submit-btn:hover { opacity: 0.9; }
+        .submit-btn:hover {
+            opacity: 0.9;
+        }
 
-        .logo { width: 100%; max-height: 190px; object-fit: contain; }
-        .play-btn { background: radial-gradient(circle, rgba(0,229,255,0.15) 0%, rgba(5,7,13,0.8) 70%); border: 2px solid #00E5FF; border-radius: 50%; width: 74px; height: 74px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+        nav.bottom-nav {
+            width: calc(100% + 24px);
+            height: 48px;
+            background-color: #05080f;
+            display: flex;
+            margin: 0 -12px -8px -12px;
+            border-top: 1px solid #121d33;
+        }
+        .tab-btn {
+            flex: 1;
+            background: none;
+            border: none;
+            color: #8A99AD;
+            font-weight: bold;
+            font-size: 11px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: background-color 0.2s, color 0.2s;
+            position: relative;
+        }
+        .tab-active {
+            background-color: #0e1726;
+            color: #00E5FF;
+        }
+        .tab-active::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background-color: #00E5FF;
+        }
+
+        audio { display: none; }
     </style>
 </head>
-<body>
+<body class="paused">
 
     <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
     <div class="modal-overlay" id="modalOverlay" onclick="toggleContactModal()"></div>
 
-    <!-- MENÚ LATERAL -->
+    <!-- MENÚ LATERAL ACTUALIZADO -->
     <div class="side-menu" id="sideMenu">
         <div class="menu-header">
             <span>MENÚ PRINCIPAL</span>
-            <button onclick="toggleMenu()" style="background:none; border:none; color:white; cursor:pointer; font-size: 16px;">✕</button>
+            <button class="menu-close" onclick="toggleMenu()">✕</button>
         </div>
         <div class="menu-items">
             <a href="#" class="menu-item" onclick="toggleMenu()">🏠 Inicio</a>
             <a href="video.html" class="menu-item">📺 Video</a>
             
-            <div class="menu-section-title">REDES SOCIALES</div>
+            <div class="menu-section-title">REDES</div>
             <div class="menu-social-grid">
-                <a href="https://www.youtube.com/@hits20radio" target="_blank" class="menu-social-btn">
+                <a href="https://www.youtube.com/@hits20radio" target="_blank" rel="noopener" class="menu-social-btn">
                     <div class="menu-social-circle">YT</div>
                     <span>Youtube</span>
                 </a>
-                <a href="https://www.tiktok.com/@hits20online" target="_blank" class="menu-social-btn">
+                <a href="https://www.tiktok.com/@hits20online?_r=1&_t=ZS-980S8qdbZa9" target="_blank" rel="noopener" class="menu-social-btn">
                     <div class="menu-social-circle">TT</div>
-                    <span>TikTok</span>
+                    <span>Tiktok</span>
                 </a>
-                <a href="https://www.threads.com/@hits20online" target="_blank" class="menu-social-btn">
+                <a href="https://www.threads.com/@hits20online" target="_blank" rel="noopener" class="menu-social-btn">
                     <div class="menu-social-circle">TH</div>
                     <span>Threads</span>
                 </a>
@@ -95,32 +434,30 @@
 
             <a class="menu-item" onclick="toggleMenu(); toggleContactModal();">💬 Contacto</a>
             <a href="#" class="menu-item">ℹ️ Acerca de</a>
-            <a href="#" class="menu-item" onclick="shareApp();">🔗 Compartir App</a>
+            <a href="#" class="menu-item" onclick="shareApp(); return false;">🔗 Compartir App</a>
         </div>
     </div>
 
     <!-- VENTANA FLOTANTE DE CONTACTO -->
     <div class="contact-modal" id="contactModal">
-        <h3>CONTACTÁ CON HITS 20</h3>
-        <!-- Usamos FormSubmit para que llegue directamente a hits20radioonline@gmail.com -->
+        <h3>CONTACTO</h3>
         <form action="https://formsubmit.co/hits20radioonline@gmail.com" method="POST" onsubmit="return validateContactForm(event)">
-            <!-- Configuraciones opcionales para FormSubmit -->
             <input type="hidden" name="_subject" value="Nuevo mensaje desde la App de Hits 20 Radio">
             <input type="hidden" name="_captcha" value="false">
 
-            <div class="form-group">
-                <label>Nombre y Apellido *</label>
-                <input type="text" name="nombre" id="conName" required placeholder="Ej: Juan Pérez">
-            </div>
             <div class="form-group">
                 <label>Correo Electrónico *</label>
                 <input type="email" name="email" id="conEmail" required placeholder="tucorreo@email.com">
             </div>
             <div class="form-group">
+                <label>Nombre y Apellido *</label>
+                <input type="text" name="nombre" id="conName" required placeholder="Ej: Juan Pérez">
+            </div>
+            <div class="form-group">
                 <label>Teléfono *</label>
                 <input type="tel" name="telefono" id="conPhone" required placeholder="Ej: 2664000000">
             </div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
                 <div class="form-group">
                     <label>Provincia *</label>
                     <input type="text" name="provincia" id="conProv" required placeholder="San Luis">
@@ -140,23 +477,180 @@
                 <div class="char-counter"><span id="charCount">0</span>/300</div>
             </div>
             
-            <button type="submit" class="submit-btn">ENVIAR MENSAJE</button>
+            <button type="submit" class="submit-btn">ENVIAR</button>
         </form>
     </div>
 
-    <header style="width: 100%; display: flex; justify-content: space-between; padding: 10px;">
-        <span style="font-size: 24px; cursor: pointer;" onclick="toggleMenu()">☰</span>
+    <header class="top-bar">
+        <span style="font-size: 18px; cursor: pointer;" onclick="toggleMenu()">☰</span>
+        <span style="font-size: 15px; cursor: pointer;" onclick="shareApp()">🔗</span>
     </header>
 
-    <main style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
+    <main style="width: 100%; display: flex; flex-direction: column; align-items: center; gap: 8px;">
         <img src="hits20_logo.png" alt="Hits 20 Logo" class="logo">
-        <button class="play-btn" onclick="alert('Reproduciendo...')">▶</button>
+
+        <div class="badge">● EN VIVO</div>
+
+        <section class="equalizer-wrapper" aria-label="Vúmetro futurista">
+            <div class="cyber-equalizer" id="cyberEq"></div>
+        </section>
+
+        <section class="info-container">
+            <div class="now-playing">ESTADO</div>
+            <h1 class="song-title" id="songTitle" style="font-size: 13px; font-weight: bold;">PAUSADO</h1>
+            <div class="song-artist">Transmisión Oficial</div>
+        </section>
+
+        <div class="meta-row">
+            <span>🎵 GÉNERO: HITS</span>
+            <span>📡 128 kbps</span>
+        </div>
+
+        <audio id="radioStream" preload="none" src="https://stream.radiosmundiales.com:8692/stream"></audio>
+
+        <button class="play-btn" onclick="togglePlay()" aria-label="Reproducir o Pausar">
+            <svg id="playIcon" viewBox="0 0 24 24" width="34" height="34" fill="#00E5FF">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
+            </svg>
+        </button>
+
+        <div class="volume-container">
+            <span>🔊</span>
+            <input type="range" id="volumeBar" min="0" max="100" value="80" oninput="changeVolume(this.value)" aria-label="Control de volumen">
+            <span id="volumeText" style="font-size: 9px;">80%</span>
+        </div>
+
+        <section class="social-row">
+            <a href="https://www.facebook.com/hits20radio/" target="_blank" rel="noopener" class="social-item">
+                <div class="social-circle circle-fb">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="#FFFFFF"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                </div>
+                <span>Facebook</span>
+            </a>
+            <a href="https://www.instagram.com/hits20online/" target="_blank" rel="noopener" class="social-item">
+                <div class="social-circle circle-ig">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="#FFFFFF"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                </div>
+                <span>Instagram</span>
+            </a>
+            <a href="https://wa.me/5492664728261" target="_blank" rel="noopener" class="social-item">
+                <div class="social-circle circle-wa">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="#FFFFFF"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.096 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+                </div>
+                <span>WhatsApp</span>
+            </a>
+            <a href="https://Hits20radioonline.com" target="_blank" rel="noopener" class="social-item">
+                <div class="social-circle circle-web">🌐</div>
+                <span>Sitio Web</span>
+            </a>
+        </section>
     </main>
 
+    <nav class="bottom-nav">
+        <button class="tab-btn tab-active">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M20 6H4c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 10H4V8h16v8zM6 10h2v4H6zm10 0h2v4h-2z"/></svg>
+            RADIO
+        </button>
+        <button class="tab-btn" onclick="window.location.href='video.html'">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/></svg>
+            VIDEO
+        </button>
+    </nav>
+
     <script>
+        const audio = document.getElementById('radioStream');
+        const playIcon = document.getElementById('playIcon');
+        const volumeText = document.getElementById('volumeText');
+        const songTitle = document.getElementById('songTitle');
+        const cyberEqContainer = document.getElementById('cyberEq');
+        const sideMenu = document.getElementById('sideMenu');
+        const menuOverlay = document.getElementById('menuOverlay');
+
+        audio.volume = 0.8;
+
+        const totalBars = 32;
+        const bars = [];
+
+        for (let i = 0; i < totalBars; i++) {
+            const bar = document.createElement('div');
+            bar.className = 'cyber-bar';
+            bar.style.height = '6px';
+            cyberEqContainer.appendChild(bar);
+            
+            bars.push({
+                element: bar,
+                height: Math.random() * 45 + 8,
+                speed: Math.random() * 0.3 + 0.15,
+                angle: Math.random() * Math.PI
+            });
+        }
+
+        let animationId = null;
+
+        function updateCyberEqualizer() {
+            if (audio.paused) return;
+
+            bars.forEach((bar) => {
+                bar.angle += bar.speed;
+                const dynamicHeight = Math.abs(Math.sin(bar.angle) * 35) + Math.random() * 15 + 6;
+                bar.element.style.height = dynamicHeight + 'px';
+                
+                if (dynamicHeight > 38) {
+                    bar.element.style.boxShadow = '0 0 12px #FF1744';
+                } else if (dynamicHeight > 22) {
+                    bar.element.style.boxShadow = '0 0 10px #7C4DFF';
+                } else {
+                    bar.element.style.boxShadow = '0 0 8px #00E5FF';
+                }
+            });
+
+            animationId = requestAnimationFrame(updateCyberEqualizer);
+        }
+
+        function togglePlay() {
+            if (audio.paused) {
+                audio.play().then(() => {
+                    document.body.classList.remove('paused');
+                    songTitle.innerText = "HITS 20 RADIO ONLINE V3";
+                    playIcon.innerHTML = '<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/>';
+                    if (!animationId) {
+                        updateCyberEqualizer();
+                    }
+                    if ('mediaSession' in navigator) {
+                        navigator.mediaSession.metadata = new MediaMetadata({
+                            title: 'Hits 20 Radio Online v3',
+                            artist: 'Transmisión Oficial',
+                            album: 'En Vivo'
+                        });
+                    }
+                }).catch(error => {
+                    console.log("Error al reproducir el streaming:", error);
+                });
+            } else {
+                audio.pause();
+                document.body.classList.add('paused');
+                songTitle.innerText = "PAUSADO";
+                playIcon.innerHTML = '<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>';
+                
+                if (animationId) {
+                    cancelAnimationFrame(animationId);
+                    animationId = null;
+                }
+                bars.forEach(bar => {
+                    bar.element.style.height = '4px';
+                    bar.element.style.boxShadow = 'none';
+                });
+            }
+        }
+
+        function changeVolume(val) {
+            audio.volume = val / 100;
+            volumeText.innerText = val + "%";
+        }
+
         function toggleMenu() {
-            document.getElementById('sideMenu').classList.toggle('open');
-            document.getElementById('menuOverlay').classList.toggle('open');
+            sideMenu.classList.toggle('open');
+            menuOverlay.classList.toggle('open');
         }
 
         function toggleContactModal() {
@@ -171,8 +665,6 @@
 
         function validateContactForm(event) {
             const msg = document.getElementById('conMsg').value;
-            
-            // Medida de seguridad: Bloquear links o URLs en la descripción
             const urlPattern = /(http:\/\/|https:\/\/|www\.|\.com|\.net|\.org|\.ar|ftp:\/\/)/i;
             if (urlPattern.test(msg)) {
                 alert("⚠️ Por seguridad, está prohibido incluir enlaces (links) en la descripción.");
@@ -184,9 +676,17 @@
 
         function shareApp() {
             if (navigator.share) {
-                navigator.share({ title: 'Hits 20 Radio', url: window.location.href });
+                navigator.share({
+                    title: 'Hits 20 Radio Online',
+                    text: 'Escuchá Hits 20 Radio Online en vivo:',
+                    url: window.location.href
+                }).catch(() => {});
             } else {
-                alert("Enlace copiado al portapapeles");
+                navigator.clipboard.writeText(window.location.href).then(() => {
+                    alert("¡Enlace copiado al portapapeles!");
+                }).catch(() => {
+                    prompt("Copiá este enlace para compartir:", window.location.href);
+                });
             }
         }
     </script>
