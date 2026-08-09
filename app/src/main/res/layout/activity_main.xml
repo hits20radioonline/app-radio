@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -56,12 +57,16 @@
             android:textSize="11sp"/>
     </LinearLayout>
 
-    <!-- Ecualizador Visualizador -->
-    <View
+    <!-- Vúmetro / Ecualizador Dinámico al compás de la música -->
+    <com.gauravk.audiovisualizer.visualizer.BarVisualizer
+        android:id="@+id/visualizer"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:background="#101826"
-        android:layout_marginBottom="8dp"/>
+        android:layout_marginBottom="8dp"
+        app:avColor="#00E5FF"
+        app:avDensity="0.8"
+        app:avPlayerStyle="normal"
+        app:avSpeed="normal" />
 
     <!-- Ahora Suena Info -->
     <TextView
@@ -154,7 +159,6 @@
             android:max="100"
             android:progress="80"/>
         
-        <!-- ID AGREGADO AQUÍ PARA CONTROLAR EL TEXTO DINÁMICO -->
         <TextView
             android:id="@+id/volumeText"
             android:layout_width="wrap_content"
