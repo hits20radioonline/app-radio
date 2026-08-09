@@ -12,7 +12,7 @@
             padding: 0;
         }
         body {
-            background-color: #05070D;
+            background-color: #030508;
             color: white;
             font-family: sans-serif;
             display: flex;
@@ -34,7 +34,7 @@
 
         .logo {
             width: 100%;
-            max-height: 220px;
+            max-height: 200px;
             object-fit: contain;
             margin: 2px 0;
         }
@@ -46,60 +46,43 @@
             font-size: 9px;
             font-weight: bold;
             letter-spacing: 1px;
-            box-shadow: 0 0 8px rgba(255, 23, 68, 0.4);
+            box-shadow: 0 0 10px rgba(255, 23, 68, 0.5);
             margin: 2px 0;
         }
 
-        /* Vúmetro Ultra Fluido de Última Generación */
+        /* Vúmetro Futurista Holográfico */
         .equalizer-wrapper {
             width: 100%;
             display: flex;
             flex-direction: column;
-            padding: 2px 4px;
-            margin: 4px 0;
+            align-items: center;
+            justify-content: center;
+            height: 75px;
+            position: relative;
+            margin: 2px 0;
         }
 
-        .equalizer {
+        .cyber-equalizer {
             display: flex;
-            align-items: flex-end;
-            justify-content: space-between;
-            height: 60px;
-            gap: 1.2px;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
             width: 100%;
-        }
-
-        .bar-group {
-            flex: 1;
-            display: flex;
-            flex-direction: column-reverse;
             height: 100%;
-            gap: 1px;
         }
 
-        .led-block {
-            width: 100%;
-            height: 1.8px;
-            border-radius: 0.5px;
-            background-color: #0c1428;
-            transition: background-color 0.03s ease, box-shadow 0.03s ease;
+        .cyber-bar {
+            width: 6px;
+            background: linear-gradient(180deg, #FF1744, #7C4DFF, #00E5FF);
+            border-radius: 4px;
+            transition: height 0.04s ease, box-shadow 0.04s ease;
+            box-shadow: 0 0 8px rgba(0, 229, 255, 0.4);
         }
 
-        .paused .led-block {
-            background-color: #0c1428 !important;
+        .paused .cyber-bar {
+            height: 4px !important;
+            background: #0d162d !important;
             box-shadow: none !important;
-        }
-
-        .equalizer-reflection {
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            height: 20px;
-            gap: 1.2px;
-            width: 100%;
-            opacity: 0.25;
-            transform: scaleY(-1);
-            filter: blur(1.2px);
-            margin-top: 1px;
         }
 
         .info-container {
@@ -126,21 +109,23 @@
             color: #8FEFFF;
         }
 
-        /* Botón Play optimizado y más grande */
+        /* Botón Play Holográfico Gigante */
         .play-btn {
-            background: none;
-            border: none;
+            background: radial-gradient(circle, rgba(0,229,255,0.15) 0%, rgba(5,7,13,0.8) 70%);
+            border: 2px solid #00E5FF;
+            border-radius: 50%;
             cursor: pointer;
-            width: 76px;
-            height: 76px;
+            width: 78px;
+            height: 78px;
             display: flex;
             align-items: center;
             justify-content: center;
-            filter: drop-shadow(0 0 12px rgba(0, 229, 255, 0.4));
-            transition: transform 0.1s ease;
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.3), inset 0 0 10px rgba(0, 229, 255, 0.2);
+            transition: transform 0.1s ease, box-shadow 0.1s ease;
         }
         .play-btn:active {
-            transform: scale(0.95);
+            transform: scale(0.94);
+            box-shadow: 0 0 10px rgba(0, 229, 255, 0.6);
         }
 
         .volume-container {
@@ -190,7 +175,7 @@
         nav.bottom-nav {
             width: calc(100% + 24px);
             height: 38px;
-            background-color: #05070D;
+            background-color: #030508;
             display: flex;
             margin: 0 -12px -8px -12px;
         }
@@ -223,10 +208,9 @@
 
         <div class="badge">● EN VIVO</div>
 
-        <!-- Vúmetro LED de Última Generación -->
-        <section class="equalizer-wrapper" aria-label="Espectro de audio avanzado">
-            <div class="equalizer" id="eqBars"></div>
-            <div class="equalizer-reflection" id="eqReflections"></div>
+        <!-- Vúmetro Futurista Onda Cibernética -->
+        <section class="equalizer-wrapper" aria-label="Vúmetro futurista">
+            <div class="cyber-equalizer" id="cyberEq"></div>
         </section>
 
         <section class="info-container">
@@ -243,7 +227,7 @@
         <audio id="radioStream" preload="none" src="https://stream.radiosmundiales.com:8692/stream"></audio>
 
         <button class="play-btn" onclick="togglePlay()" aria-label="Reproducir o Pausar">
-            <svg id="playIcon" viewBox="0 0 24 24" width="74" height="74" fill="#00E5FF">
+            <svg id="playIcon" viewBox="0 0 24 24" width="38" height="38" fill="#00E5FF">
                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
             </svg>
         </button>
@@ -290,86 +274,49 @@
         const playIcon = document.getElementById('playIcon');
         const volumeText = document.getElementById('volumeText');
         const songTitle = document.getElementById('songTitle');
-        const eqBarsContainer = document.getElementById('eqBars');
+        const cyberEqContainer = document.getElementById('cyberEq');
 
         audio.volume = 0.8;
 
-        const totalColumns = 38;
-        const totalRows = 22; // Mayor resolución de LEDs para fluidez extrema
-        const columns = [];
+        const totalBars = 32;
+        const bars = [];
 
-        for (let i = 0; i < totalColumns; i++) {
-            const group = document.createElement('div');
-            group.className = 'bar-group';
-            const blocks = [];
-
-            for (let j = 0; j < totalRows; j++) {
-                const block = document.createElement('div');
-                block.className = 'led-block';
-                group.appendChild(block);
-                blocks.push(block);
-            }
-            eqBarsContainer.appendChild(group);
+        for (let i = 0; i < totalBars; i++) {
+            const bar = document.createElement('div');
+            bar.className = 'cyber-bar';
+            bar.style.height = '6px';
+            cyberEqContainer.appendChild(bar);
             
-            columns.push({
-                blocks: blocks,
-                height: Math.floor(Math.random() * totalRows) + 2,
-                peak: Math.floor(Math.random() * totalRows) + 2,
-                speed: Math.random() * 40 + 25,
-                counter: 0
+            bars.push({
+                element: bar,
+                height: Math.random() * 45 + 8,
+                speed: Math.random() * 0.3 + 0.15,
+                angle: Math.random() * Math.PI
             });
         }
 
-        let animationInterval = null;
+        let animationId = null;
 
-        function updateEqualizer() {
+        function updateCyberEqualizer() {
             if (audio.paused) return;
 
-            columns.forEach((col) => {
-                col.counter++;
-                if (col.counter >= 2) {
-                    col.counter = 0;
-                    const diff = (Math.random() > 0.45 ? 1 : -1) * Math.floor(Math.random() * 5);
-                    col.height = Math.min(Math.max(col.height + diff, 2), totalRows);
-                    
-                    // Picos dinámicos ocasionales estilo audio profesional
-                    if (Math.random() < 0.15) {
-                        col.height = Math.floor(Math.random() * 8) + 14;
-                    }
-
-                    // Efecto inercia / gravedad para el pico superior
-                    if (col.height > col.peak) {
-                        col.peak = col.height;
-                    } else if (col.peak > col.height) {
-                        col.peak -= 0.6; // Descenso fluido del pico
-                    }
+            bars.forEach((bar, index) => {
+                bar.angle += bar.speed;
+                // Onda senoidal simétrica combinada con factor aleatorio para simular audio real fluido
+                const dynamicHeight = Math.abs(Math.sin(bar.angle) * 38) + Math.random() * 18 + 6;
+                bar.element.style.height = dynamicHeight + 'px';
+                
+                // Efecto de brillo dinámico según la altura
+                if (dynamicHeight > 40) {
+                    bar.element.style.boxShadow = '0 0 12px #FF1744';
+                } else if (dynamicHeight > 25) {
+                    bar.element.style.boxShadow = '0 0 10px #7C4DFF';
+                } else {
+                    bar.element.style.boxShadow = '0 0 8px #00E5FF';
                 }
-
-                const currentPeakInt = Math.round(col.peak);
-
-                col.blocks.forEach((block, rowIndex) => {
-                    if (rowIndex < col.height) {
-                        // Gradiente de colores high-end (Cian -> Azul -> Violeta -> Rojo Neón)
-                        if (rowIndex < 7) {
-                            block.style.backgroundColor = '#00E5FF';
-                            block.style.boxShadow = '0 0 5px rgba(0, 229, 255, 0.7)';
-                        } else if (rowIndex < 14) {
-                            block.style.backgroundColor = '#7C4DFF';
-                            block.style.boxShadow = '0 0 5px rgba(124, 77, 255, 0.7)';
-                        } else {
-                            block.style.backgroundColor = '#FF1744';
-                            block.style.boxShadow = '0 0 6px rgba(255, 23, 68, 0.9)';
-                        }
-                    } else if (rowIndex === currentPeakInt && currentPeakInt > 0) {
-                        // LED de Pico con brillo máximo flotante
-                        block.style.backgroundColor = '#FFFFFF';
-                        block.style.boxShadow = '0 0 8px #FFFFFF, 0 0 4px #FF1744';
-                    } else {
-                        block.style.backgroundColor = '#0c1428';
-                        block.style.boxShadow = 'none';
-                    }
-                });
             });
+
+            animationId = requestAnimationFrame(updateCyberEqualizer);
         }
 
         function togglePlay() {
@@ -378,8 +325,8 @@
                     document.body.classList.remove('paused');
                     songTitle.innerText = "HITS 20 RADIO ONLINE V2";
                     playIcon.innerHTML = '<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/>';
-                    if (!animationInterval) {
-                        animationInterval = setInterval(updateEqualizer, 30); // Refresco ultra rápido a ~33fps
+                    if (!animationId) {
+                        updateCyberEqualizer();
                     }
                     if ('mediaSession' in navigator) {
                         navigator.mediaSession.metadata = new MediaMetadata({
@@ -397,11 +344,13 @@
                 songTitle.innerText = "PAUSADO";
                 playIcon.innerHTML = '<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>';
                 
-                columns.forEach(col => {
-                    col.blocks.forEach(block => {
-                        block.style.backgroundColor = '#0c1428';
-                        block.style.boxShadow = 'none';
-                    });
+                if (animationId) {
+                    cancelAnimationFrame(animationId);
+                    animationId = null;
+                }
+                bars.forEach(bar => {
+                    bar.element.style.height = '4px';
+                    bar.element.style.boxShadow = 'none';
                 });
             }
         }
