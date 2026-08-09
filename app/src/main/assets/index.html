@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hits 20 Radio Online v2</title>
-    <!-- Enlace al manifiesto para la PWA (nombre y logo en el celular) -->
     <link rel="manifest" href="manifest.json">
     <style>
         * {
@@ -35,7 +34,7 @@
 
         .logo {
             width: 100%;
-            max-height: 230px;
+            max-height: 220px;
             object-fit: contain;
             margin: 2px 0;
         }
@@ -51,23 +50,21 @@
             margin: 2px 0;
         }
 
-        .equalizer-container {
+        /* Vúmetro LED libre (sin rectángulo de fondo) */
+        .equalizer-wrapper {
             width: 100%;
             display: flex;
             flex-direction: column;
-            background: #030509;
-            border-radius: 8px;
-            padding: 6px 4px;
-            border: 1px solid #101828;
-            box-shadow: inset 0 0 15px rgba(0,0,0,0.9), 0 0 12px rgba(0, 150, 255, 0.1);
+            padding: 2px 4px;
+            margin: 4px 0;
         }
 
         .equalizer {
             display: flex;
             align-items: flex-end;
             justify-content: space-between;
-            height: 65px;
-            gap: 2px;
+            height: 55px;
+            gap: 1.5px;
             width: 100%;
         }
 
@@ -76,15 +73,15 @@
             display: flex;
             flex-direction: column-reverse;
             height: 100%;
-            gap: 1.5px;
+            gap: 1px;
         }
 
         .led-block {
             width: 100%;
-            height: 3.5px;
+            height: 2px; /* LED más pequeño y fluido */
             border-radius: 0.5px;
             background-color: #0b1329;
-            transition: background-color 0.08s ease;
+            transition: background-color 0.05s ease;
         }
 
         .paused .led-block {
@@ -96,12 +93,12 @@
             display: flex;
             align-items: flex-start;
             justify-content: space-between;
-            height: 22px;
-            gap: 2px;
+            height: 18px;
+            gap: 1.5px;
             width: 100%;
-            opacity: 0.25;
+            opacity: 0.2;
             transform: scaleY(-1);
-            filter: blur(1.5px);
+            filter: blur(1px);
             margin-top: 1px;
         }
 
@@ -129,15 +126,17 @@
             color: #8FEFFF;
         }
 
+        /* Botón Play más grande */
         .play-btn {
             background: none;
             border: none;
             cursor: pointer;
-            width: 50px;
-            height: 50px;
+            width: 72px;
+            height: 72px;
             display: flex;
             align-items: center;
             justify-content: center;
+            filter: drop-shadow(0 0 8px rgba(0, 229, 255, 0.3));
         }
 
         .volume-container {
@@ -220,7 +219,8 @@
 
         <div class="badge">● EN VIVO</div>
 
-        <section class="equalizer-container" aria-label="Espectro de audio">
+        <!-- Vúmetro sin rectángulo contenedor -->
+        <section class="equalizer-wrapper" aria-label="Espectro de audio">
             <div class="equalizer" id="eqBars"></div>
             <div class="equalizer-reflection" id="eqReflections"></div>
         </section>
@@ -239,7 +239,7 @@
         <audio id="radioStream" preload="none" src="https://stream.radiosmundiales.com:8692/stream"></audio>
 
         <button class="play-btn" onclick="togglePlay()" aria-label="Reproducir o Pausar">
-            <svg id="playIcon" viewBox="0 0 24 24" width="50" height="50" fill="#00E5FF">
+            <svg id="playIcon" viewBox="0 0 24 24" width="70" height="70" fill="#00E5FF">
                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
             </svg>
         </button>
@@ -290,8 +290,8 @@
 
         audio.volume = 0.8;
 
-        const totalColumns = 32;
-        const totalRows = 12;
+        const totalColumns = 34;
+        const totalRows = 18; // Más filas con LEDs más pequeños para mayor fluidez
         const columns = [];
 
         for (let i = 0; i < totalColumns; i++) {
@@ -310,7 +310,7 @@
             columns.push({
                 blocks: blocks,
                 height: Math.floor(Math.random() * totalRows) + 2,
-                speed: Math.random() * 120 + 80,
+                speed: Math.random() * 90 + 50,
                 counter: 0
             });
         }
@@ -321,27 +321,27 @@
             if (audio.paused) return;
 
             columns.forEach((col) => {
-                col.counter += 30;
+                col.counter += 20;
                 if (col.counter >= col.speed) {
                     col.counter = 0;
-                    const diff = (Math.random() > 0.5 ? 1 : -1) * Math.floor(Math.random() * 3);
+                    const diff = (Math.random() > 0.5 ? 1 : -1) * Math.floor(Math.random() * 4);
                     col.height = Math.min(Math.max(col.height + diff, 2), totalRows);
-                    if (Math.random() < 0.15) {
-                        col.height = Math.floor(Math.random() * 4) + 9;
+                    if (Math.random() < 0.2) {
+                        col.height = Math.floor(Math.random() * 6) + 12;
                     }
                 }
 
                 col.blocks.forEach((block, rowIndex) => {
                     if (rowIndex < col.height) {
-                        if (rowIndex < 5) {
+                        if (rowIndex < 8) {
                             block.style.backgroundColor = '#00B0FF';
-                            block.style.boxShadow = '0 0 4px rgba(0, 176, 255, 0.6)';
-                        } else if (rowIndex < 9) {
+                            block.style.boxShadow = '0 0 3px rgba(0, 176, 255, 0.5)';
+                        } else if (rowIndex < 13) {
                             block.style.backgroundColor = '#7C4DFF';
-                            block.style.boxShadow = '0 0 4px rgba(124, 77, 255, 0.6)';
+                            block.style.boxShadow = '0 0 3px rgba(124, 77, 255, 0.5)';
                         } else {
                             block.style.backgroundColor = '#FF1744';
-                            block.style.boxShadow = '0 0 6px rgba(255, 23, 68, 0.8)';
+                            block.style.boxShadow = '0 0 4px rgba(255, 23, 68, 0.7)';
                         }
                     } else {
                         block.style.backgroundColor = '#0b1329';
@@ -358,7 +358,7 @@
                     songTitle.innerText = "HITS 20 RADIO ONLINE V2";
                     playIcon.innerHTML = '<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/>';
                     if (!animationInterval) {
-                        animationInterval = setInterval(updateEqualizer, 65);
+                        animationInterval = setInterval(updateEqualizer, 45);
                     }
                     if ('mediaSession' in navigator) {
                         navigator.mediaSession.metadata = new MediaMetadata({
