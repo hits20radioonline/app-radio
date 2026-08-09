@@ -196,7 +196,7 @@
                 android:layout_marginTop="4dp"/>
         </LinearLayout>
 
-        <!-- Instagram (Logotipo Oficial con Marco Redondeado y Cámara Estilizada) -->
+        <!-- Instagram -->
         <LinearLayout
             android:id="@+id/btnInstagram"
             android:layout_width="0dp"
@@ -206,17 +206,11 @@
             android:gravity="center"
             android:clickable="true"
             android:focusable="true">
-            <FrameLayout
+            <ImageView
                 android:layout_width="44dp"
                 android:layout_height="44dp"
-                android:background="@drawable/rounded_insta"
-                android:gravity="center">
-                <View
-                    android:layout_width="22dp"
-                    android:layout_height="22dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/insta_lens"/>
-            </FrameLayout>
+                android:src="@drawable/ic_instagram"
+                android:scaleType="fitCenter"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -226,7 +220,7 @@
                 android:layout_marginTop="4dp"/>
         </LinearLayout>
 
-        <!-- WhatsApp (Logotipo Oficial con Burbuja y Teléfono Central) -->
+        <!-- WhatsApp -->
         <LinearLayout
             android:id="@+id/btnWhatsapp"
             android:layout_width="0dp"
@@ -236,13 +230,11 @@
             android:gravity="center"
             android:clickable="true"
             android:focusable="true">
-            <TextView
+            <ImageView
                 android:layout_width="44dp"
                 android:layout_height="44dp"
-                android:background="@drawable/circle_wa"
-                android:text="💬"
-                android:textSize="21sp"
-                android:gravity="center"/>
+                android:src="@drawable/ic_whatsapp"
+                android:scaleType="fitCenter"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
