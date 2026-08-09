@@ -21,7 +21,39 @@
         .header-section {
             width: 100%;
             text-align: center;
-            padding: 4px 0;
+            padding: 2px 0;
+        }
+        /* Contenedor para los bloques de opciones idénticos a la segunda placa */
+        .info-cards {
+            width: 100%;
+            max-width: 420px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin: 4px 0;
+        }
+        .info-card {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background-color: #05080f;
+            border: 1px solid #121d33;
+            padding: 6px 10px;
+            border-radius: 6px;
+        }
+        .info-card svg, .info-card .icon-box {
+            flex-shrink: 0;
+        }
+        .card-text h3 {
+            font-size: 12px;
+            font-weight: bold;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+        }
+        .card-text p {
+            font-size: 10px;
+            color: #8A99AD;
+            margin-top: 1px;
         }
         .video-container {
             width: 100%;
@@ -29,14 +61,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 5px 0;
+            padding: 2px 0;
         }
         /* Contenedor cuadrado y proporcionado */
         .player-wrapper {
             width: 100%;
             max-width: 420px;
             aspect-ratio: 1 / 1;
-            max-height: 55vh;
+            max-height: 48vh;
             border-radius: 8px;
             border: 1px solid #121d33;
             overflow: hidden;
@@ -85,9 +117,35 @@
 <body>
 
     <div class="header-section">
-        <h2 style="font-size: 14px; color: #00E5FF; letter-spacing: 1px; margin-bottom: 4px;">TRANSMISIÓN EN VIVO</h2>
-        <h1 style="font-size: 16px; font-weight: bold; color: #ffffff; letter-spacing: 0.5px;">HITS20 RADIO ONLINE V2</h1>
-        <p style="font-size: 11px; color: #00E5FF; margin-top: 2px;">Tu música, tu compañía, siempre!</p>
+        <h2 style="font-size: 13px; color: #00E5FF; letter-spacing: 1px; margin-bottom: 2px;">TRANSMISIÓN EN VIVO</h2>
+        <h1 style="font-size: 15px; font-weight: bold; color: #ffffff; letter-spacing: 0.5px;">HITS20 RADIO ONLINE V2</h1>
+        <p style="font-size: 10px; color: #00E5FF; margin-top: 1px;">Tu música, tu compañía, siempre!</p>
+    </div>
+
+    <!-- Bloques idénticos a la segunda placa -->
+    <div class="info-cards">
+        <div class="info-card">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00E5FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9"></path>
+                <path d="M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.4"></path>
+                <circle cx="12" cy="12" r="2"></circle>
+                <path d="M16.2 7.8c2.3 2.3 2.3 6.1 0 8.4"></path>
+                <path d="M19.1 4.9C23 8.8 23 15.2 19.1 19.1"></path>
+            </svg>
+            <div class="card-text">
+                <h3>RADIO EN VIVO</h3>
+                <p>Escuchá nuestra programación las 24 horas.</p>
+            </div>
+        </div>
+        <div class="info-card">
+            <div class="icon-box" style="width: 24px; height: 24px; background: #e50914; border-radius: 4px; display: flex; align-items: center; justify-content: center;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+            <div class="card-text">
+                <h3>TV EN VIVO</h3>
+                <p>Disfrutá nuestra señal de video en directo.</p>
+            </div>
+        </div>
     </div>
 
     <div class="video-container">
