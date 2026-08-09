@@ -26,11 +26,11 @@
             justify-content: center;
             padding: 10px 0;
         }
-        /* Ajustado para ser más cuadrado: aspect-ratio 1:1 */
+        /* Cuadrado y proporcionado */
         iframe {
             width: 100%;
-            max-width: 450px; /* Limita el ancho para que no se estire demasiado */
-            aspect-ratio: 1 / 1; 
+            max-width: 450px;
+            aspect-ratio: 1 / 1;
             max-height: 60vh;
             border-radius: 8px;
             border: 1px solid #121d33;
@@ -77,9 +77,9 @@
     </div>
 
     <div class="video-container">
-        <!-- Iframe configurado para evitar el Error 153 -->
+        <!-- Se cambió el parámetro de incrustación para evitar restricciones de origen en WebView -->
         <iframe 
-            src="https://www.youtube-nocookie.com/embed/live_stream?channel=UCYMI2V3TXIBcgydxz3eGSuw&autoplay=1" 
+            src="https://www.youtube.com/embed?listType=search&list=Hits+20+Radio+Online" 
             title="YouTube video player" 
             frameborder="0" 
             referrerpolicy="strict-origin-when-cross-origin"
