@@ -16,7 +16,7 @@
             justify-content: space-between;
             min-height: 100vh;
             padding: 8px 12px;
-            overflow: hidden; /* Evita scrolls innecesarios */
+            overflow: hidden;
         }
         .video-container {
             width: 100%;
@@ -26,11 +26,12 @@
             justify-content: center;
             padding: 10px 0;
         }
-        /* Ajuste responsivo para el reproductor */
+        /* Ajustado para ser más cuadrado: aspect-ratio 1:1 */
         iframe {
             width: 100%;
-            aspect-ratio: 16 / 9;
-            max-height: 70vh;
+            max-width: 450px; /* Limita el ancho para que no se estire demasiado */
+            aspect-ratio: 1 / 1; 
+            max-height: 60vh;
             border-radius: 8px;
             border: 1px solid #121d33;
         }
@@ -76,11 +77,12 @@
     </div>
 
     <div class="video-container">
-        <!-- Reemplazado width="1005" por control de ancho vía CSS y ID de canal integrado -->
+        <!-- Iframe configurado para evitar el Error 153 -->
         <iframe 
-            src="https://www.youtube.com/embed/live_stream?channel=UCYMI2V3TXIBcgydxz3eGSuw" 
+            src="https://www.youtube-nocookie.com/embed/live_stream?channel=UCYMI2V3TXIBcgydxz3eGSuw&autoplay=1" 
             title="YouTube video player" 
             frameborder="0" 
+            referrerpolicy="strict-origin-when-cross-origin"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
             allowfullscreen>
         </iframe>
