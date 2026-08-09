@@ -50,7 +50,7 @@
             margin: 2px 0;
         }
 
-        /* Vúmetro LED libre (sin rectángulo de fondo) */
+        /* Vúmetro Ultra Fluido de Última Generación */
         .equalizer-wrapper {
             width: 100%;
             display: flex;
@@ -63,8 +63,8 @@
             display: flex;
             align-items: flex-end;
             justify-content: space-between;
-            height: 55px;
-            gap: 1.5px;
+            height: 60px;
+            gap: 1.2px;
             width: 100%;
         }
 
@@ -78,14 +78,14 @@
 
         .led-block {
             width: 100%;
-            height: 2px; /* LED más pequeño y fluido */
+            height: 1.8px;
             border-radius: 0.5px;
-            background-color: #0b1329;
-            transition: background-color 0.05s ease;
+            background-color: #0c1428;
+            transition: background-color 0.03s ease, box-shadow 0.03s ease;
         }
 
         .paused .led-block {
-            background-color: #0b1329 !important;
+            background-color: #0c1428 !important;
             box-shadow: none !important;
         }
 
@@ -93,12 +93,12 @@
             display: flex;
             align-items: flex-start;
             justify-content: space-between;
-            height: 18px;
-            gap: 1.5px;
+            height: 20px;
+            gap: 1.2px;
             width: 100%;
-            opacity: 0.2;
+            opacity: 0.25;
             transform: scaleY(-1);
-            filter: blur(1px);
+            filter: blur(1.2px);
             margin-top: 1px;
         }
 
@@ -126,17 +126,21 @@
             color: #8FEFFF;
         }
 
-        /* Botón Play más grande */
+        /* Botón Play optimizado y más grande */
         .play-btn {
             background: none;
             border: none;
             cursor: pointer;
-            width: 72px;
-            height: 72px;
+            width: 76px;
+            height: 76px;
             display: flex;
             align-items: center;
             justify-content: center;
-            filter: drop-shadow(0 0 8px rgba(0, 229, 255, 0.3));
+            filter: drop-shadow(0 0 12px rgba(0, 229, 255, 0.4));
+            transition: transform 0.1s ease;
+        }
+        .play-btn:active {
+            transform: scale(0.95);
         }
 
         .volume-container {
@@ -219,8 +223,8 @@
 
         <div class="badge">● EN VIVO</div>
 
-        <!-- Vúmetro sin rectángulo contenedor -->
-        <section class="equalizer-wrapper" aria-label="Espectro de audio">
+        <!-- Vúmetro LED de Última Generación -->
+        <section class="equalizer-wrapper" aria-label="Espectro de audio avanzado">
             <div class="equalizer" id="eqBars"></div>
             <div class="equalizer-reflection" id="eqReflections"></div>
         </section>
@@ -239,7 +243,7 @@
         <audio id="radioStream" preload="none" src="https://stream.radiosmundiales.com:8692/stream"></audio>
 
         <button class="play-btn" onclick="togglePlay()" aria-label="Reproducir o Pausar">
-            <svg id="playIcon" viewBox="0 0 24 24" width="70" height="70" fill="#00E5FF">
+            <svg id="playIcon" viewBox="0 0 24 24" width="74" height="74" fill="#00E5FF">
                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
             </svg>
         </button>
@@ -290,8 +294,8 @@
 
         audio.volume = 0.8;
 
-        const totalColumns = 34;
-        const totalRows = 18; // Más filas con LEDs más pequeños para mayor fluidez
+        const totalColumns = 38;
+        const totalRows = 22; // Mayor resolución de LEDs para fluidez extrema
         const columns = [];
 
         for (let i = 0; i < totalColumns; i++) {
@@ -310,7 +314,8 @@
             columns.push({
                 blocks: blocks,
                 height: Math.floor(Math.random() * totalRows) + 2,
-                speed: Math.random() * 90 + 50,
+                peak: Math.floor(Math.random() * totalRows) + 2,
+                speed: Math.random() * 40 + 25,
                 counter: 0
             });
         }
@@ -321,30 +326,46 @@
             if (audio.paused) return;
 
             columns.forEach((col) => {
-                col.counter += 20;
-                if (col.counter >= col.speed) {
+                col.counter++;
+                if (col.counter >= 2) {
                     col.counter = 0;
-                    const diff = (Math.random() > 0.5 ? 1 : -1) * Math.floor(Math.random() * 4);
+                    const diff = (Math.random() > 0.45 ? 1 : -1) * Math.floor(Math.random() * 5);
                     col.height = Math.min(Math.max(col.height + diff, 2), totalRows);
-                    if (Math.random() < 0.2) {
-                        col.height = Math.floor(Math.random() * 6) + 12;
+                    
+                    // Picos dinámicos ocasionales estilo audio profesional
+                    if (Math.random() < 0.15) {
+                        col.height = Math.floor(Math.random() * 8) + 14;
+                    }
+
+                    // Efecto inercia / gravedad para el pico superior
+                    if (col.height > col.peak) {
+                        col.peak = col.height;
+                    } else if (col.peak > col.height) {
+                        col.peak -= 0.6; // Descenso fluido del pico
                     }
                 }
 
+                const currentPeakInt = Math.round(col.peak);
+
                 col.blocks.forEach((block, rowIndex) => {
                     if (rowIndex < col.height) {
-                        if (rowIndex < 8) {
-                            block.style.backgroundColor = '#00B0FF';
-                            block.style.boxShadow = '0 0 3px rgba(0, 176, 255, 0.5)';
-                        } else if (rowIndex < 13) {
+                        // Gradiente de colores high-end (Cian -> Azul -> Violeta -> Rojo Neón)
+                        if (rowIndex < 7) {
+                            block.style.backgroundColor = '#00E5FF';
+                            block.style.boxShadow = '0 0 5px rgba(0, 229, 255, 0.7)';
+                        } else if (rowIndex < 14) {
                             block.style.backgroundColor = '#7C4DFF';
-                            block.style.boxShadow = '0 0 3px rgba(124, 77, 255, 0.5)';
+                            block.style.boxShadow = '0 0 5px rgba(124, 77, 255, 0.7)';
                         } else {
                             block.style.backgroundColor = '#FF1744';
-                            block.style.boxShadow = '0 0 4px rgba(255, 23, 68, 0.7)';
+                            block.style.boxShadow = '0 0 6px rgba(255, 23, 68, 0.9)';
                         }
+                    } else if (rowIndex === currentPeakInt && currentPeakInt > 0) {
+                        // LED de Pico con brillo máximo flotante
+                        block.style.backgroundColor = '#FFFFFF';
+                        block.style.boxShadow = '0 0 8px #FFFFFF, 0 0 4px #FF1744';
                     } else {
-                        block.style.backgroundColor = '#0b1329';
+                        block.style.backgroundColor = '#0c1428';
                         block.style.boxShadow = 'none';
                     }
                 });
@@ -358,7 +379,7 @@
                     songTitle.innerText = "HITS 20 RADIO ONLINE V2";
                     playIcon.innerHTML = '<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/>';
                     if (!animationInterval) {
-                        animationInterval = setInterval(updateEqualizer, 45);
+                        animationInterval = setInterval(updateEqualizer, 30); // Refresco ultra rápido a ~33fps
                     }
                     if ('mediaSession' in navigator) {
                         navigator.mediaSession.metadata = new MediaMetadata({
@@ -378,7 +399,7 @@
                 
                 columns.forEach(col => {
                     col.blocks.forEach(block => {
-                        block.style.backgroundColor = '#0b1329';
+                        block.style.backgroundColor = '#0c1428';
                         block.style.boxShadow = 'none';
                     });
                 });
