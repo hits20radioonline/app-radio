@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.hits20radio.online.v2"
-    compileSdk = 34 // Ajustado a una versión estable recomendada para evitar conflictos con librerías de terceros
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.hits20radio.online.v2"
@@ -44,7 +44,4 @@ dependencies {
     implementation("androidx.media3:media3-exoplayer-hls:$m")
     implementation("androidx.media3:media3-ui:$m")
     implementation("androidx.media3:media3-session:$m")
-    
-    // Librería del vúmetro / ecualizador visual dinámico
-    implementation("com.github.gauravk95:audiovisualizer:0.9.2")
 }
