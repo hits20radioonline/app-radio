@@ -12,7 +12,6 @@
 
     <application
         android:icon="@mipmap/ic_launcher"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/Theme.Hits20"
         android:label="Hits20 Radio Online"
         android:usesCleartextTraffic="true">
