@@ -32,10 +32,10 @@
             align-items: center;
         }
 
-        /* Logo Extra Agrandado y Centrado (Ocupando mayor espacio visual) */
+        /* Logo Extra Agrandado y Centrado */
         .logo {
             width: 100%;
-            max-height: 240px;
+            max-height: 230px;
             object-fit: contain;
             margin: 2px 0;
         }
@@ -49,67 +49,82 @@
             font-weight: bold;
             letter-spacing: 1px;
             box-shadow: 0 0 8px rgba(255, 23, 68, 0.4);
-            margin: 4px 0;
+            margin: 2px 0;
         }
 
-        /* Vúmetro Estilo Espectro Completo Multicolor (Inspirado en la imagen de referencia) */
+        /* Vúmetro Estilo Analizador de Bloques LED (Estilo Referencia exacto) */
+        .equalizer-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            background: #030509;
+            border-radius: 8px;
+            padding: 6px 4px;
+            border: 1px solid #101828;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.9), 0 0 12px rgba(0, 150, 255, 0.1);
+        }
+
         .equalizer {
             display: flex;
             align-items: flex-end;
             justify-content: space-between;
-            height: 55px;
-            gap: 1.5px;
+            height: 65px;
+            gap: 2px;
             width: 100%;
-            background: #05070D;
-            border-radius: 8px;
-            padding: 4px 2px;
-            border: 1px solid #1A233A;
-            box-shadow: inset 0 0 12px rgba(0,0,0,0.8), 0 0 10px rgba(0, 176, 255, 0.15);
         }
-        .bar {
+
+        .bar-group {
             flex: 1;
+            display: flex;
+            flex-direction: column-reverse; /* Los bloques se apilan desde abajo hacia arriba */
             height: 100%;
-            border-radius: 1px;
-            background: linear-gradient(to top, #00B0FF, #7C4DFF, #FF1744);
-            animation: bounceSpectrum 0.8s infinite ease-in-out alternate;
+            gap: 1.5px;
         }
+
+        .led-block {
+            width: 100%;
+            height: 3.5px;
+            border-radius: 0.5px;
+            background-color: #0b1329; /* Apagado por defecto */
+            transition: background-color 0.08s ease;
+        }
+
+        /* Colores de los bloques según la altura (Gradiente vertical LED) */
+        /* Filas inferiores: Celestes / Azules */
+        /* Filas medias: Azules brillantes / Violetas */
+        /* Filas superiores: Fucsia / Rosado / Rojo brillante */
         
-        /* Variaciones de velocidad y retraso para simular frecuencias de audio reales */
-        .bar:nth-child(25n+1) { animation-duration: 0.5s; animation-delay: 0.1s; }
-        .bar:nth-child(25n+2) { animation-duration: 0.7s; animation-delay: 0.3s; }
-        .bar:nth-child(25n+3) { animation-duration: 0.6s; animation-delay: 0.05s; }
-        .bar:nth-child(25n+4) { animation-duration: 0.9s; animation-delay: 0.4s; }
-        .bar:nth-child(25n+5) { animation-duration: 0.55s; animation-delay: 0.2s; }
-        .bar:nth-child(25n+6) { animation-duration: 0.8s; animation-delay: 0.35s; }
-        .bar:nth-child(25n+7) { animation-duration: 0.65s; animation-delay: 0.15s; }
-        .bar:nth-child(25n+8) { animation-duration: 0.75s; animation-delay: 0.25s; }
-        .bar:nth-child(25n+9) { animation-duration: 0.5s; animation-delay: 0.45s; }
-        .bar:nth-child(25n+10) { animation-duration: 0.85s; animation-delay: 0.08s; }
-        .bar:nth-child(25n+11) { animation-duration: 0.6s; animation-delay: 0.28s; }
-        .bar:nth-child(25n+12) { animation-duration: 0.95s; animation-delay: 0.12s; }
-        .bar:nth-child(25n+13) { animation-duration: 0.55s; animation-delay: 0.38s; }
-        .bar:nth-child(25n+14) { animation-duration: 0.7s; animation-delay: 0.22s; }
-        .bar:nth-child(25n+15) { animation-duration: 0.8s; animation-delay: 0.02s; }
-        .bar:nth-child(25n+16) { animation-duration: 0.65s; animation-delay: 0.42s; }
-        .bar:nth-child(25n+17) { animation-duration: 0.5s; animation-delay: 0.18s; }
-        .bar:nth-child(25n+18) { animation-duration: 0.9s; animation-delay: 0.32s; }
-        .bar:nth-child(25n+19) { animation-duration: 0.6s; animation-delay: 0.07s; }
-        .bar:nth-child(25n+20) { animation-duration: 0.75s; animation-delay: 0.26s; }
-        .bar:nth-child(25n+21) { animation-duration: 0.55s; animation-delay: 0.14s; }
-        .bar:nth-child(25n+22) { animation-duration: 0.85s; animation-delay: 0.36s; }
-        .bar:nth-child(25n+23) { animation-duration: 0.65s; animation-delay: 0.09s; }
-        .bar:nth-child(25n+24) { animation-duration: 0.7s; animation-delay: 0.24s; }
-        .bar:nth-child(25n+0) { animation-duration: 0.8s; animation-delay: 0.4s; }
-
-        @keyframes bounceSpectrum {
-            0% { transform: scaleY(0.15); opacity: 0.3; }
-            100% { transform: scaleY(1); opacity: 1; }
+        .paused .led-block {
+            background-color: #0b1329 !important;
+            box-shadow: none !important;
         }
 
-        .paused .bar {
-            animation-play-state: paused;
-            transform: scaleY(0.1) !important;
-            opacity: 0.2;
+        /* Reflejo inferior idéntico al estilo de la imagen */
+        .equalizer-reflection {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            height: 22px;
+            gap: 2px;
+            width: 100%;
+            opacity: 0.25;
+            transform: scaleY(-1);
+            filter: blur(1.5px);
+            margin-top: 1px;
+        }
+
+        .reflection-group {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            gap: 1.5px;
+        }
+
+        .reflection-block {
+            width: 100%;
+            height: 3.5px;
+            background-color: #00B0FF;
         }
 
         /* Info de reproducción */
@@ -143,8 +158,8 @@
             background: none;
             border: none;
             cursor: pointer;
-            width: 54px;
-            height: 54px;
+            width: 50px;
+            height: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -179,8 +194,8 @@
             color: white;
         }
         .social-circle {
-            width: 34px;
-            height: 34px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -199,7 +214,7 @@
         /* Pestañas inferiores */
         .bottom-nav {
             width: calc(100% + 24px);
-            height: 40px;
+            height: 38px;
             background-color: #05070D;
             display: flex;
             margin: 0 -12px -8px -12px;
@@ -229,24 +244,20 @@
         <span style="font-size: 15px;">🔗</span>
     </div>
 
-    <!-- Logo Más Grande -->
+    <!-- Logo -->
     <img src="hits20_logo.png" alt="Hits 20 Logo" class="logo">
 
     <!-- En Vivo Badge -->
     <div class="badge">● EN VIVO</div>
 
-    <!-- Vúmetro Espectro Dinámico Avanzado -->
-    <div class="equalizer paused" id="eqContainer">
-        <!-- 36 barras para simular un espectro analizador de audio fluido y detallado -->
-        <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
-        <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
-        <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
-        <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
-        <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
-        <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
-        <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
-        <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
-        <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+    <!-- Vúmetro Estilo Analizador de Bloques LED con Reflejo -->
+    <div class="equalizer-container">
+        <div class="equalizer" id="eqBars">
+            <!-- Se generan dinámicamente mediante JS las columnas de bloques -->
+        </div>
+        <div class="equalizer-reflection" id="eqReflections">
+            <!-- Reflejo sincronizado -->
+        </div>
     </div>
 
     <!-- Info -->
@@ -267,7 +278,7 @@
 
     <!-- Play/Pause Button -->
     <button class="play-btn" onclick="togglePlay()">
-        <svg id="playIcon" viewBox="0 0 24 24" width="54" height="54" fill="#00E5FF">
+        <svg id="playIcon" viewBox="0 0 24 24" width="50" height="50" fill="#00E5FF">
             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>
         </svg>
     </button>
@@ -283,19 +294,19 @@
     <div class="social-row">
         <a href="https://facebook.com" target="_blank" class="social-item">
             <div class="social-circle circle-fb">
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="#FFFFFF"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                <svg viewBox="0 0 24 24" width="15" height="15" fill="#FFFFFF"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
             </div>
             <span>Facebook</span>
         </a>
         <a href="https://instagram.com" target="_blank" class="social-item">
             <div class="social-circle circle-ig">
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="#FFFFFF"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                <svg viewBox="0 0 24 24" width="15" height="15" fill="#FFFFFF"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
             </div>
             <span>Instagram</span>
         </a>
         <a href="https://whatsapp.com" target="_blank" class="social-item">
             <div class="social-circle circle-wa">
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="#FFFFFF"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.096 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+                <svg viewBox="0 0 24 24" width="15" height="15" fill="#FFFFFF"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.096 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
             </div>
             <span>WhatsApp</span>
         </a>
@@ -313,29 +324,106 @@
 
     <script>
         const audio = document.getElementById('radioStream');
-        const eqContainer = document.getElementById('eqContainer');
         const playIcon = document.getElementById('playIcon');
         const volumeText = document.getElementById('volumeText');
         const songTitle = document.getElementById('songTitle');
+        const eqBarsContainer = document.getElementById('eqBars');
 
         audio.volume = 0.8;
+
+        // Configuración del espectro LED de bloques discretos
+        const totalColumns = 32;
+        const totalRows = 12; // Número de bloques por barra vertical
+        const columns = [];
+
+        // Generar estructura de bloques LED
+        for (let i = 0; i < totalColumns; i++) {
+            const group = document.createElement('div');
+            group.className = 'bar-group';
+            const blocks = [];
+
+            for (let j = 0; j < totalRows; j++) {
+                const block = document.createElement('div');
+                block.className = 'led-block';
+                group.appendChild(block);
+                blocks.push(block);
+            }
+            eqBarsContainer.appendChild(group);
+            
+            // Asignar patrón de frecuencias aleatorias simuladas estilo ecualizador gráfico real
+            columns.push({
+                blocks: blocks,
+                height: Math.floor(Math.random() * totalRows) + 2,
+                speed: Math.random() * 120 + 80,
+                counter: 0
+            });
+        }
+
+        let animationInterval = null;
+
+        function updateEqualizer() {
+            if (audio.paused) return;
+
+            columns.forEach((col, idx) => {
+                col.counter += 30;
+                if (col.counter >= col.speed) {
+                    col.counter = 0;
+                    // Variación orgánica de altura
+                    const diff = (Math.random() > 0.5 ? 1 : -1) * Math.floor(Math.random() * 3);
+                    col.height = Math.min(Math.max(col.height + diff, 2), totalRows);
+                    // Ocasionales picos altos
+                    if (Math.random() < 0.15) {
+                        col.height = Math.floor(Math.random() * 4) + 9;
+                    }
+                }
+
+                // Encender/Apagar bloques según la altura actual de la columna con colores de referencia
+                col.blocks.forEach((block, rowIndex) => {
+                    if (rowIndex < col.height) {
+                        // Asignación de colores por rango de altura (Efecto LED idéntico a la foto)
+                        if (rowIndex < 5) {
+                            block.style.backgroundColor = '#00B0FF'; // Azul inferior
+                            block.style.boxShadow = '0 0 4px rgba(0, 176, 255, 0.6)';
+                        } else if (rowIndex < 9) {
+                            block.style.backgroundColor = '#7C4DFF'; // Violeta medio
+                            block.style.boxShadow = '0 0 4px rgba(124, 77, 255, 0.6)';
+                        } else {
+                            block.style.backgroundColor = '#FF1744'; // Fucsia/Rojo superior (Picos)
+                            block.style.boxShadow = '0 0 6px rgba(255, 23, 68, 0.8)';
+                        }
+                    } else {
+                        block.style.backgroundColor = '#0b1329';
+                        block.style.boxShadow = 'none';
+                    }
+                });
+            });
+        }
 
         function togglePlay() {
             if (audio.paused) {
                 audio.play().then(() => {
-                    eqContainer.classList.remove('paused');
                     document.body.classList.remove('paused');
                     songTitle.innerText = "HITS20 RADIO ONLINE";
                     playIcon.innerHTML = '<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/>';
+                    if (!animationInterval) {
+                        animationInterval = setInterval(updateEqualizer, 65);
+                    }
                 }).catch(error => {
                     console.log("Error al reproducir el streaming:", error);
                 });
             } else {
                 audio.pause();
-                eqContainer.classList.add('paused');
                 document.body.classList.add('paused');
                 songTitle.innerText = "PAUSADO";
                 playIcon.innerHTML = '<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>';
+                
+                // Apagar todos los bloques visualmente
+                columns.forEach(col => {
+                    col.blocks.forEach(block => {
+                        block.style.backgroundColor = '#0b1329';
+                        block.style.boxShadow = 'none';
+                    });
+                });
             }
         }
 
