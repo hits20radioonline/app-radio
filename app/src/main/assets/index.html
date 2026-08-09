@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hits 20 Radio Online</title>
+    <title>Hits 20 Radio Online v2</title>
+    <!-- Enlace al manifiesto para la PWA (nombre y logo en el celular) -->
+    <link rel="manifest" href="manifest.json">
     <style>
         * {
             box-sizing: border-box;
@@ -353,14 +355,14 @@
             if (audio.paused) {
                 audio.play().then(() => {
                     document.body.classList.remove('paused');
-                    songTitle.innerText = "HITS20 RADIO ONLINE";
+                    songTitle.innerText = "HITS 20 RADIO ONLINE V2";
                     playIcon.innerHTML = '<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/>';
                     if (!animationInterval) {
                         animationInterval = setInterval(updateEqualizer, 65);
                     }
                     if ('mediaSession' in navigator) {
                         navigator.mediaSession.metadata = new MediaMetadata({
-                            title: 'Hits20 Radio Online',
+                            title: 'Hits 20 Radio Online v2',
                             artist: 'Transmisión Oficial',
                             album: 'En Vivo'
                         });
