@@ -13,7 +13,6 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: space-between;
             min-height: 100vh;
             padding: 8px 12px;
             overflow: hidden;
@@ -21,58 +20,44 @@
         .header-section {
             width: 100%;
             text-align: center;
-            padding: 2px 0;
-            margin-bottom: 8px; /* Margen añadido en la cabecera */
+            padding-top: 10px;
         }
-        /* Contenedor para los bloques de opciones centrados */
-        .info-cards {
+        /* Bloque central con margen superior e inferior */
+        .middle-content {
             width: 100%;
             max-width: 420px;
+            margin: 20px 0; /* Margen de dos párrafos aproximadamente */
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 6px;
-            margin: 4px 0;
+            gap: 8px;
         }
         .info-card {
             width: 100%;
             display: flex;
             align-items: center;
-            justify-content: center; /* Centrado interno de los elementos */
-            gap: 12px;
+            justify-content: center;
             background-color: #05080f;
             border: 1px solid #121d33;
             padding: 8px 10px;
             border-radius: 6px;
-            text-align: left;
         }
         .info-card-content {
             display: flex;
             align-items: center;
             gap: 12px;
             width: 100%;
-            max-width: 290px; /* Mantiene la alineación simétrica del contenido interno */
+            max-width: 290px;
         }
-        .card-text h3 {
-            font-size: 12px;
-            font-weight: bold;
-            color: #ffffff;
-            letter-spacing: 0.5px;
-        }
-        .card-text p {
-            font-size: 10px;
-            color: #8A99AD;
-            margin-top: 1px;
-        }
+        .card-text h3 { font-size: 12px; font-weight: bold; color: #ffffff; }
+        .card-text p { font-size: 10px; color: #8A99AD; margin-top: 1px; }
+        
         .video-container {
             width: 100%;
             flex: 1;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             justify-content: center;
-            padding: 2px 0;
         }
-        /* Contenedor cuadrado y proporcionado */
         .player-wrapper {
             width: 100%;
             max-width: 420px;
@@ -83,11 +68,8 @@
             overflow: hidden;
             background-color: #000;
         }
-        iframe, video {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
+        iframe { width: 100%; height: 100%; border: none; }
+        
         nav.bottom-nav {
             width: calc(100% + 24px);
             height: 48px;
@@ -96,55 +78,27 @@
             margin: 0 -12px -8px -12px;
             border-top: 1px solid #121d33;
         }
-        .tab-btn {
-            flex: 1;
-            background: none;
-            border: none;
-            color: #8A99AD;
-            font-weight: bold;
-            font-size: 11px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            position: relative;
-        }
-        .tab-active {
-            background-color: #0e1726;
-            color: #00E5FF;
-        }
-        .tab-active::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 3px;
-            background-color: #00E5FF;
-        }
+        .tab-btn { flex: 1; background: none; border: none; color: #8A99AD; font-weight: bold; font-size: 11px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; position: relative; }
+        .tab-active { background-color: #0e1726; color: #00E5FF; }
+        .tab-active::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background-color: #00E5FF; }
     </style>
 </head>
 <body>
 
     <div class="header-section">
-        <h2 style="font-size: 13px; color: #00E5FF; letter-spacing: 1px; margin-bottom: 2px;">TRANSMISIÓN EN VIVO</h2>
-        <h1 style="font-size: 15px; font-weight: bold; color: #ffffff; letter-spacing: 0.5px;">HITS20 RADIO ONLINE V2</h1>
-        <p style="font-size: 10px; color: #00E5FF; margin-top: 1px;">Tu música, tu compañía, siempre!</p>
+        <h2 style="font-size: 13px; color: #00E5FF; letter-spacing: 1px; margin-bottom: 4px;">TRANSMISIÓN EN VIVO</h2>
+        <h1 style="font-size: 16px; font-weight: bold; color: #ffffff;">HITS20 RADIO ONLINE V2</h1>
+        <p style="font-size: 11px; color: #00E5FF; margin-top: 2px;">Tu música, tu compañía, siempre!</p>
     </div>
 
-    <!-- Bloques centrados perfectamente entre la cabecera y el video -->
-    <div class="info-cards">
+    <!-- Bloque central con el margen solicitado -->
+    <div class="middle-content">
         <div class="info-card">
             <div class="info-card-content">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00E5FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;">
-                    <path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9"></path>
-                    <path d="M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.4"></path>
-                    <circle cx="12" cy="12" r="2"></circle>
-                    <path d="M16.2 7.8c2.3 2.3 2.3 6.1 0 8.4"></path>
-                    <path d="M19.1 4.9C23 8.8 23 15.2 19.1 19.1"></path>
-                </svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00E5FF" stroke-width="2" style="flex-shrink: 0;"><path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9"/><path d="M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.4"/><circle cx="12" cy="12" r="2"/><path d="M16.2 7.8c2.3 2.3 2.3 6.1 0 8.4"/><path d="M19.1 4.9C23 8.8 23 15.2 19.1 19.1"/></svg>
                 <div class="card-text">
                     <h3>RADIO EN VIVO</h3>
-                    <p>Escuchá nuestra programación las 24 horas.</p>
+                    <p>Escucha nuestra programacion las 24 hs.</p>
                 </div>
             </div>
         </div>
@@ -155,7 +109,7 @@
                 </div>
                 <div class="card-text">
                     <h3>TV EN VIVO</h3>
-                    <p>Disfrutá nuestra señal de video en directo.</p>
+                    <p>Disfruta nuestra señal de video en directo.</p>
                 </div>
             </div>
         </div>
@@ -163,24 +117,13 @@
 
     <div class="video-container">
         <div class="player-wrapper">
-            <iframe 
-                src="https://radiosmundiales.com/sanluismas/" 
-                title="San Luis Más Transmisión" 
-                allow="autoplay; encrypted-media; picture-in-picture" 
-                allowfullscreen>
-            </iframe>
+            <iframe src="https://radiosmundiales.com/sanluismas/" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
         </div>
     </div>
 
     <nav class="bottom-nav">
-        <button class="tab-btn" onclick="window.location.href='index.html'">
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M20 6H4c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 10H4V8h16v8zM6 10h2v4H6zm10 0h2v4h-2z"/></svg>
-            RADIO
-        </button>
-        <button class="tab-btn tab-active">
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/></svg>
-            VIDEO
-        </button>
+        <button class="tab-btn" onclick="window.location.href='index.html'">RADIO</button>
+        <button class="tab-btn tab-active">VIDEO</button>
     </nav>
 
 </body>
