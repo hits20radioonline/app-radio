@@ -19,7 +19,7 @@
             align-items: center;
             justify-content: space-between;
             height: 100vh;
-            padding: 16px;
+            padding: 12px 16px;
             overflow: hidden;
         }
 
@@ -29,96 +29,109 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 6px;
         }
 
-        /* Logo */
+        /* Logo Agrandado */
         .logo {
             width: 100%;
-            height: 100px;
+            max-height: 140px;
             object-fit: contain;
-            margin-bottom: 4px;
+            margin: 2px 0;
         }
 
         /* En Vivo Badge */
         .badge {
             background: linear-gradient(135deg, #FF1744, #D50000);
-            padding: 4px 14px;
+            padding: 3px 12px;
             border-radius: 20px;
-            font-size: 11sp;
+            font-size: 10px;
             font-weight: bold;
-            margin-bottom: 12px;
             letter-spacing: 1px;
-            box-shadow: 0 0 10px rgba(255, 23, 68, 0.4);
+            box-shadow: 0 0 8px rgba(255, 23, 68, 0.4);
+            margin-bottom: 4px;
         }
 
-        /* Vúmetro Animado Moderno */
+        /* Vúmetro Estilo Onda Dinámica (Barras Finitas Multicolor) */
         .equalizer {
             display: flex;
             align-items: flex-end;
             justify-content: center;
-            height: 45px;
-            gap: 4px;
+            height: 50px;
+            gap: 2.5px;
             width: 100%;
-            background: #101826;
-            border-radius: 8px;
-            margin-bottom: 12px;
-            padding: 5px;
+            background: #0D131F;
+            border-radius: 10px;
+            padding: 6px 4px;
+            border: 1px solid #1A233A;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+            margin-bottom: 4px;
         }
         .bar {
-            width: 6px;
-            background: linear-gradient(to top, #00B0FF, #00E5FF, #7C4DFF);
-            border-radius: 3px;
-            animation: bounce 1.2s infinite ease-in-out;
+            width: 3.5px;
+            border-radius: 2px;
+            background: linear-gradient(to top, #00B0FF, #7C4DFF, #FF1744);
+            animation: bounce 0.9s infinite ease-in-out alternate;
         }
-        .bar:nth-child(1) { animation-delay: 0.1s; }
-        .bar:nth-child(2) { animation-delay: 0.3s; }
-        .bar:nth-child(3) { animation-delay: 0.5s; }
-        .bar:nth-child(4) { animation-delay: 0.2s; }
-        .bar:nth-child(5) { animation-delay: 0.6s; }
-        .bar:nth-child(6) { animation-delay: 0.4s; }
-        .bar:nth-child(7) { animation-delay: 0.25s; }
-        .bar:nth-child(8) { animation-delay: 0.55s; }
+        /* Variaciones de tiempos para que el movimiento luzca natural y aleatorio */
+        .bar:nth-child(odd) { animation-duration: 0.7s; }
+        .bar:nth-child(even) { animation-duration: 1.1s; }
+        .bar:nth-child(3n) { animation-duration: 0.85s; }
+        
+        .bar:nth-child(1)  { animation-delay: 0.1s; }
+        .bar:nth-child(2)  { animation-delay: 0.3s; }
+        .bar:nth-child(3)  { animation-delay: 0.2s; }
+        .bar:nth-child(4)  { animation-delay: 0.4s; }
+        .bar:nth-child(5)  { animation-delay: 0.15s; }
+        .bar:nth-child(6)  { animation-delay: 0.5s; }
+        .bar:nth-child(7)  { animation-delay: 0.25s; }
+        .bar:nth-child(8)  { animation-delay: 0.45s; }
+        .bar:nth-child(9)  { animation-delay: 0.05s; }
+        .bar:nth-child(10) { animation-delay: 0.35s; }
+        .bar:nth-child(11) { animation-delay: 0.55s; }
+        .bar:nth-child(12) { animation-delay: 0.12s; }
+        .bar:nth-child(13) { animation-delay: 0.38s; }
+        .bar:nth-child(14) { animation-delay: 0.22s; }
+        .bar:nth-child(15) { animation-delay: 0.48s; }
+        .bar:nth-child(16) { animation-delay: 0.18s; }
 
         @keyframes bounce {
-            0%, 100% { height: 8px; }
-            50% { height: 38px; }
+            0% { height: 6px; opacity: 0.4; }
+            100% { height: 42px; opacity: 1; }
         }
 
         /* Estado pausado */
         .paused .bar {
             animation-play-state: paused;
-            height: 6px;
+            height: 4px !important;
+            opacity: 0.3;
         }
 
         /* Info de reproducción */
         .info-container {
             text-align: center;
-            margin-bottom: 12px;
+            margin-bottom: 4px;
         }
         .now-playing {
             color: #8A99AD;
-            font-size: 10px;
-            margin-bottom: 2px;
+            font-size: 9px;
             letter-spacing: 1px;
         }
         .song-title {
-            font-size: 15px;
+            font-size: 14px;
             font-weight: bold;
-            margin-bottom: 2px;
         }
         .song-artist {
             color: #B0BEC5;
-            font-size: 12px;
+            font-size: 11px;
         }
 
         /* Género y Bitrate */
         .meta-row {
             display: flex;
-            gap: 16px;
-            font-size: 11px;
+            gap: 14px;
+            font-size: 10px;
             color: #8FEFFF;
-            margin-bottom: 16px;
+            margin-bottom: 8px;
         }
 
         /* Botón Play central */
@@ -126,16 +139,12 @@
             background: none;
             border: none;
             cursor: pointer;
-            width: 75px;
-            height: 75px;
-            margin-bottom: 20px;
+            width: 70px;
+            height: 70px;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-        .play-btn img {
-            width: 100%;
-            height: 100%;
         }
 
         /* Barra de Volumen */
@@ -144,12 +153,13 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            margin-bottom: 16px;
+            margin-bottom: 8px;
             padding: 0 10px;
         }
         .volume-container input[type=range] {
             flex: 1;
             accent-color: #00E5FF;
+            height: 4px;
         }
 
         /* Redes Sociales */
@@ -157,7 +167,7 @@
             width: 100%;
             display: flex;
             justify-content: space-around;
-            margin-bottom: 12px;
+            margin-bottom: 4px;
         }
         .social-item {
             display: flex;
@@ -168,32 +178,32 @@
             color: white;
         }
         .social-circle {
-            width: 44px;
-            height: 44px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            font-size: 20px;
-            margin-bottom: 4px;
+            font-size: 18px;
+            margin-bottom: 2px;
         }
-        .circle-fb { background-color: #1877F2; font-size: 24px; }
+        .circle-fb { background-color: #1877F2; }
         .circle-ig { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #df5950 45%, #c62368 60%, #515ec4 90%); }
         .circle-wa { background-color: #25D366; }
         .circle-web { background-color: #121826; border: 1px solid #00E5FF; }
         .social-item span {
-            font-size: 11px;
+            font-size: 10px;
             color: #FFFFFF;
         }
 
         /* Pestañas inferiores */
         .bottom-nav {
             width: calc(100% + 32px);
-            height: 50px;
+            height: 45px;
             background-color: #05070D;
             display: flex;
-            margin: 0 -16px -16px -16px;
+            margin: 0 -16px -12px -16px;
         }
         .tab-btn {
             flex: 1;
@@ -201,7 +211,7 @@
             border: none;
             color: #8A99AD;
             font-weight: bold;
-            font-size: 13px;
+            font-size: 12px;
             cursor: pointer;
         }
         .tab-active {
@@ -216,26 +226,22 @@
 
     <!-- Top Bar -->
     <div class="top-bar">
-        <span style="font-size: 22px;">☰</span>
-        <span style="font-size: 18px;">🔗</span>
+        <span style="font-size: 20px;">☰</span>
+        <span style="font-size: 16px;">🔗</span>
     </div>
 
-    <!-- Logo -->
+    <!-- Logo Agrandado (Sin texto blanco web debajo) -->
     <img src="hits20_logo.png" alt="Hits 20 Logo" class="logo">
 
     <!-- En Vivo Badge -->
     <div class="badge">● EN VIVO</div>
 
-    <!-- Vúmetro / Ecualizador Animado -->
+    <!-- Vúmetro Estilo Onda (Barras finas múltiples) -->
     <div class="equalizer" id="eqContainer">
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
+        <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+        <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+        <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+        <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
     </div>
 
     <!-- Info -->
@@ -251,12 +257,12 @@
         <span>📡 128 kbps</span>
     </div>
 
-    <!-- Audio Player Oculto -->
+    <!-- Audio Stream -->
     <audio id="radioStream" src="https://stream.radiosmundiales.com:8692/stream" autoplay></audio>
 
     <!-- Play/Pause Button -->
     <button class="play-btn" onclick="togglePlay()">
-        <svg id="playIcon" viewBox="0 0 24 24" width="75" height="75" fill="#00E5FF">
+        <svg id="playIcon" viewBox="0 0 24 24" width="70" height="70" fill="#00E5FF">
             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/>
         </svg>
     </button>
@@ -265,23 +271,33 @@
     <div class="volume-container">
         <span>🔊</span>
         <input type="range" id="volumeBar" min="0" max="100" value="80" oninput="changeVolume(this.value)">
-        <span id="volumeText" style="font-size: 11px;">80%</span>
+        <span id="volumeText" style="font-size: 10px;">80%</span>
     </div>
 
     <!-- Redes Sociales -->
     <div class="social-row">
+        <!-- Facebook -->
         <a href="https://facebook.com" target="_blank" class="social-item">
-            <div class="social-circle circle-fb">f</div>
+            <div class="social-circle circle-fb">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="#FFFFFF"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </div>
             <span>Facebook</span>
         </a>
+        <!-- Instagram -->
         <a href="https://instagram.com" target="_blank" class="social-item">
-            <div class="social-circle circle-ig">📷</div>
+            <div class="social-circle circle-ig">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="#FFFFFF"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </div>
             <span>Instagram</span>
         </a>
+        <!-- WhatsApp -->
         <a href="https://whatsapp.com" target="_blank" class="social-item">
-            <div class="social-circle circle-wa">💬</div>
+            <div class="social-circle circle-wa">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="#FFFFFF"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.096 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+            </div>
             <span>WhatsApp</span>
         </a>
+        <!-- Sitio Web -->
         <a href="https://hits20radioonline.com" target="_blank" class="social-item">
             <div class="social-circle circle-web">🌐</div>
             <span>Sitio Web</span>
@@ -301,21 +317,17 @@
         const volumeText = document.getElementById('volumeText');
         const songTitle = document.getElementById('songTitle');
 
-        let isPlaying = true;
-
         function togglePlay() {
             if (audio.paused) {
                 audio.play();
                 eqContainer.classList.remove('paused');
                 songTitle.innerText = "HITS20 RADIO ONLINE";
-                playIcon.innerHTML = '<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/>'; // Pausa icon
-                isPlaying = true;
+                playIcon.innerHTML = '<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/>';
             } else {
                 audio.pause();
                 eqContainer.classList.add('paused');
                 songTitle.innerText = "PAUSADO";
-                playIcon.innerHTML = '<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>'; // Play icon
-                isPlaying = false;
+                playIcon.innerHTML = '<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/>';
             }
         }
 
