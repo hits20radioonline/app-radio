@@ -1,4 +1,4 @@
-package com.hits20radio.online
+package com.hits20radio.online.v2
 
 import android.os.Bundle
 import android.webkit.WebSettings
