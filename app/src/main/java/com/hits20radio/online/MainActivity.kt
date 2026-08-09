@@ -19,7 +19,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val playBtn = findViewById<Button>(R.id.play)
+        val playBtn = findViewById<ImageButton>(R.id.play)
         val songTitle = findViewById<TextView>(R.id.songTitle)
         val volumeBar = findViewById<SeekBar>(R.id.volumeBar)
         val videoTab = findViewById<Button>(R.id.videoTab)
