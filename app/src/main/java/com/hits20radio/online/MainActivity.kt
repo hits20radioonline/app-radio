@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton // IMPORTACIÓN NECESARIA
 import android.widget.LinearLayout
 import android.widget.SeekBar
 import android.widget.TextView
@@ -19,7 +20,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val playBtn = findViewById<ImageButton>(R.id.play)
+        val playBtn = findViewById<ImageButton>(R.id.play) // Ahora correcto
         val songTitle = findViewById<TextView>(R.id.songTitle)
         val volumeBar = findViewById<SeekBar>(R.id.volumeBar)
         val videoTab = findViewById<Button>(R.id.videoTab)
@@ -29,7 +30,7 @@ class MainActivity : ComponentActivity() {
         val btnWhatsapp = findViewById<LinearLayout>(R.id.btnWhatsapp)
         val btnWeb = findViewById<LinearLayout>(R.id.btnWeb)
 
-        // Inicializar ExoPlayer con tu URL oficial
+        // Inicializar ExoPlayer
         try {
             player = ExoPlayer.Builder(this).build().apply {
                 val mediaItem = MediaItem.fromUri("https://stream.radiosmundiales.com:8692/stream")
@@ -38,7 +39,8 @@ class MainActivity : ComponentActivity() {
                 play()
             }
             isPlaying = true
-            playBtn.text = "⏸"
+            // Cambiado .text por .setImageResource
+            playBtn.setImageResource(R.drawable.ic_pause_circle) 
             songTitle.text = "HITS20 RADIO ONLINE"
         } catch (e: Exception) {
             e.printStackTrace()
@@ -47,17 +49,20 @@ class MainActivity : ComponentActivity() {
         playBtn.setOnClickListener {
             if (isPlaying) {
                 player?.pause()
-                playBtn.text = "▶"
+                // Cambiado .text por .setImageResource
+                playBtn.setImageResource(R.drawable.ic_play_circle) 
                 songTitle.text = "PAUSADO"
                 isPlaying = false
             } else {
                 player?.play()
-                playBtn.text = "⏸"
+                // Cambiado .text por .setImageResource
+                playBtn.setImageResource(R.drawable.ic_pause_circle) 
                 songTitle.text = "HITS20 RADIO ONLINE"
                 isPlaying = true
             }
         }
 
+        // ... (el resto del código de volumen y redes sociales sigue igual)
         volumeBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 player?.volume = progress / 100f
@@ -66,34 +71,19 @@ class MainActivity : ComponentActivity() {
             override fun onStopTrackingTouch(seekBar: SeekBar?) {}
         })
 
-        // Redes Sociales y Sitio Web
-        btnWeb.setOnClickListener {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://hits20radioonline.com")))
-        }
-        btnFacebook.setOnClickListener {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://facebook.com")))
-        }
-        btnInstagram.setOnClickListener {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://instagram.com")))
-        }
-        btnWhatsapp.setOnClickListener {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://whatsapp.com")))
-        }
+        btnWeb.setOnClickListener { startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://hits20radioonline.com"))) }
+        btnFacebook.setOnClickListener { startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://facebook.com"))) }
+        btnInstagram.setOnClickListener { startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://instagram.com"))) }
+        btnWhatsapp.setOnClickListener { startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://whatsapp.com"))) }
 
-        // Pestaña Video
         videoTab.setOnClickListener {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://hits20radioonline.com"))
-            startActivity(intent)
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://hits20radioonline.com")))
         }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        try {
-            player?.release()
-            player = null
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
+        player?.release()
+        player = null
     }
 }
