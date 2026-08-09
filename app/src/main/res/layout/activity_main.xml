@@ -221,28 +221,32 @@
         </LinearLayout>
 
         <!-- WhatsApp -->
-        <LinearLayout
-            android:id="@+id/btnWhatsapp"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:clickable="true"
-            android:focusable="true">
-            <ImageView
-                android:layout_width="44dp"
-                android:layout_height="44dp"
-                android:src="@drawable/ic_whatsapp"
-                android:scaleType="fitCenter"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="WhatsApp"
-                android:textColor="#FFFFFF"
-                android:textSize="11sp"
-                android:layout_marginTop="4dp"/>
-        </LinearLayout>
+    <LinearLayout
+    android:id="@+id/btnWhatsapp"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:clickable="true"
+    android:focusable="true">
+
+    <!-- USAREMOS IMAGEVIEW CON EL VECTOR -->
+    <ImageView
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:src="@drawable/ic_whatsapp_fixed"
+        android:contentDescription="Icono de WhatsApp"
+        android:scaleType="fitCenter"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="WhatsApp"
+        android:textColor="#FFFFFF"
+        android:textSize="11sp"
+        android:layout_marginTop="4dp"/>
+</LinearLayout>
 
         <!-- Sitio Web -->
         <LinearLayout
