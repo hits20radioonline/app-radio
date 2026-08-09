@@ -17,67 +17,35 @@
             padding: 8px 12px;
             overflow: hidden;
         }
-        .header-section {
-            width: 100%;
-            text-align: center;
-            padding-top: 10px;
-        }
-        /* Bloque central con margen superior e inferior */
-        .middle-content {
-            width: 100%;
-            max-width: 420px;
-            margin: 20px 0; /* Margen de dos párrafos aproximadamente */
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-        .info-card {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #05080f;
-            border: 1px solid #121d33;
-            padding: 8px 10px;
-            border-radius: 6px;
-        }
-        .info-card-content {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            width: 100%;
-            max-width: 290px;
-        }
+        .header-section { width: 100%; text-align: center; padding-top: 10px; }
+        .middle-content { width: 100%; max-width: 420px; margin: 20px 0; display: flex; flex-direction: column; gap: 8px; }
+        
+        .info-card { width: 100%; display: flex; align-items: center; justify-content: center; background-color: #05080f; border: 1px solid #121d33; padding: 8px 10px; border-radius: 6px; }
+        .info-card-content { display: flex; align-items: center; gap: 12px; width: 100%; max-width: 290px; }
         .card-text h3 { font-size: 12px; font-weight: bold; color: #ffffff; }
         .card-text p { font-size: 10px; color: #8A99AD; margin-top: 1px; }
         
-        .video-container {
-            width: 100%;
-            flex: 1;
-            display: flex;
-            align-items: flex-start;
-            justify-content: center;
-        }
-        .player-wrapper {
-            width: 100%;
-            max-width: 420px;
-            aspect-ratio: 1 / 1;
-            max-height: 40vh;
-            border-radius: 8px;
-            border: 1px solid #121d33;
-            overflow: hidden;
-            background-color: #000;
-        }
+        .video-container { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+        .player-wrapper { width: 100%; max-width: 420px; aspect-ratio: 1 / 1; max-height: 40vh; border-radius: 8px; border: 1px solid #121d33; overflow: hidden; background-color: #000; }
         iframe { width: 100%; height: 100%; border: none; }
         
-        nav.bottom-nav {
-            width: calc(100% + 24px);
-            height: 48px;
-            background-color: #05080f;
+        /* Estilo del botón de actualizar */
+        .refresh-btn {
+            background-color: #0e1726;
+            color: #00E5FF;
+            border: 1px solid #121d33;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: bold;
             display: flex;
-            margin: 0 -12px -8px -12px;
-            border-top: 1px solid #121d33;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
         }
+        
+        nav.bottom-nav { width: calc(100% + 24px); height: 48px; background-color: #05080f; display: flex; margin: 0 -12px -8px -12px; border-top: 1px solid #121d33; }
         .tab-btn { flex: 1; background: none; border: none; color: #8A99AD; font-weight: bold; font-size: 11px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; position: relative; }
         .tab-active { background-color: #0e1726; color: #00E5FF; }
         .tab-active::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background-color: #00E5FF; }
@@ -91,7 +59,6 @@
         <p style="font-size: 11px; color: #00E5FF; margin-top: 2px;">Tu música, tu compañía, siempre!</p>
     </div>
 
-    <!-- Bloque central con el margen solicitado -->
     <div class="middle-content">
         <div class="info-card">
             <div class="info-card-content">
@@ -119,6 +86,11 @@
         <div class="player-wrapper">
             <iframe src="https://radiosmundiales.com/sanluismas/" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
         </div>
+        <!-- Botón de actualización -->
+        <button class="refresh-btn" onclick="location.reload();">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+            ACTUALIZAR SEÑAL
+        </button>
     </div>
 
     <nav class="bottom-nav">
