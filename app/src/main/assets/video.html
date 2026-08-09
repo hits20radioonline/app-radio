@@ -1,1 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hits 20 Video</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background-color: #030508;
+            color: white;
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 100vh;
+            padding: 8px 12px;
+            overflow: hidden; /* Evita scrolls innecesarios */
+        }
+        .video-container {
+            width: 100%;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 0;
+        }
+        /* Ajuste responsivo para el reproductor */
+        iframe {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            max-height: 70vh;
+            border-radius: 8px;
+            border: 1px solid #121d33;
+        }
+        nav.bottom-nav {
+            width: calc(100% + 24px);
+            height: 48px;
+            background-color: #05080f;
+            display: flex;
+            margin: 0 -12px -8px -12px;
+            border-top: 1px solid #121d33;
+        }
+        .tab-btn {
+            flex: 1;
+            background: none;
+            border: none;
+            color: #8A99AD;
+            font-weight: bold;
+            font-size: 11px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            position: relative;
+        }
+        .tab-active {
+            background-color: #0e1726;
+            color: #00E5FF;
+        }
+        .tab-active::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background-color: #00E5FF;
+        }
+    </style>
+</head>
+<body>
 
+    <div style="width: 100%; text-align: center; padding: 10px 0;">
+        <h2 style="font-size: 14px; color: #00E5FF; letter-spacing: 1px;">TRANSMISIÓN EN VIVO</h2>
+    </div>
+
+    <div class="video-container">
+        <!-- Reemplazado width="1005" por control de ancho vía CSS y ID de canal integrado -->
+        <iframe 
+            src="https://www.youtube.com/embed/live_stream?channel=UCYMI2V3TXIBcgydxz3eGSuw" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+        </iframe>
+    </div>
+
+    <nav class="bottom-nav">
+        <button class="tab-btn" onclick="window.location.href='index.html'">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M20 6H4c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 10H4V8h16v8zM6 10h2v4H6zm10 0h2v4h-2z"/></svg>
+            RADIO
+        </button>
+        <button class="tab-btn tab-active">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/></svg>
+            VIDEO
+        </button>
+    </nav>
+
+</body>
+</html>
