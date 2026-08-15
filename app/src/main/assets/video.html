@@ -3,100 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hits 20 Video</title>
+    <title>Video - Hits 20 Radio Online</title>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --bg-color: #0d1117;
+            --panel-bg: #161b22;
+            --text-color: #f0f6fc;
+            --accent-color: #25F4EE;
+            --border-color: #30363d;
+        }
+
+        * {
+            box-issuer: box-sizing;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
         body {
-            background-color: #030508;
-            color: white;
-            font-family: sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            padding: 8px 12px;
-            overflow: hidden;
         }
-        .header-section { width: 100%; text-align: center; padding-top: 10px; }
-        .middle-content { width: 100%; max-width: 420px; margin: 20px 0; display: flex; flex-direction: column; gap: 8px; }
-        
-        .info-card { width: 100%; display: flex; align-items: center; justify-content: center; background-color: #05080f; border: 1px solid #121d33; padding: 8px 10px; border-radius: 6px; }
-        .info-card-content { display: flex; align-items: center; gap: 12px; width: 100%; max-width: 290px; }
-        .card-text h3 { font-size: 12px; font-weight: bold; color: #ffffff; }
-        .card-text p { font-size: 10px; color: #8A99AD; margin-top: 1px; }
-        
-        .video-container { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 12px; }
-        .player-wrapper { width: 100%; max-width: 420px; aspect-ratio: 1 / 1; max-height: 40vh; border-radius: 8px; border: 1px solid #121d33; overflow: hidden; background-color: #000; }
-        iframe { width: 100%; height: 100%; border: none; }
-        
-        /* Estilo del botón de actualizar */
-        .refresh-btn {
-            background-color: #0e1726;
-            color: #00E5FF;
-            border: 1px solid #121d33;
-            padding: 8px 20px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 11px;
-            font-weight: bold;
+
+        header {
+            background-color: var(--panel-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 15px 20px;
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 8px;
-            margin-bottom: 10px;
         }
-        
-        nav.bottom-nav { width: calc(100% + 24px); height: 48px; background-color: #05080f; display: flex; margin: 0 -12px -8px -12px; border-top: 1px solid #121d33; }
-        .tab-btn { flex: 1; background: none; border: none; color: #8A99AD; font-weight: bold; font-size: 11px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; position: relative; }
-        .tab-active { background-color: #0e1726; color: #00E5FF; }
-        .tab-active::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background-color: #00E5FF; }
+
+        h1 {
+            font-size: 1.25rem;
+            color: var(--accent-color);
+        }
+
+        main {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .video-container {
+            width: 100%;
+            max-width: 800px;
+            aspect-ratio: 16/9;
+            background: #000;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
     </style>
 </head>
 <body>
 
-    <div class="header-section">
-        <h2 style="font-size: 13px; color: #00E5FF; letter-spacing: 1px; margin-bottom: 4px;">TRANSMISIÓN EN VIVO</h2>
-        <h1 style="font-size: 16px; font-weight: bold; color: #ffffff;">HITS20 RADIO ONLINE V2</h1>
-        <p style="font-size: 11px; color: #00E5FF; margin-top: 2px;">Tu música, tu compañía, siempre!</p>
-    </div>
+    <header>
+        <h1>Transmisión en Vivo</h1>
+    </header>
 
-    <div class="middle-content">
-        <div class="info-card">
-            <div class="info-card-content">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00E5FF" stroke-width="2" style="flex-shrink: 0;"><path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9"/><path d="M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.4"/><circle cx="12" cy="12" r="2"/><path d="M16.2 7.8c2.3 2.3 2.3 6.1 0 8.4"/><path d="M19.1 4.9C23 8.8 23 15.2 19.1 19.1"/></svg>
-                <div class="card-text">
-                    <h3>RADIO EN VIVO</h3>
-                    <p>Escucha nuestra programacion las 24 hs.</p>
-                </div>
-            </div>
+    <main>
+        <!-- Marco externo aislado de forma estricta mediante sandbox (Punto 4) y conexiones seguras (Punto 2) -->
+        <div class="video-container">
+            <iframe 
+                src="https://www.youtube-nocookie.com/embed/live_stream?channel=TU_CANAL_ID" 
+                sandbox="allow-scripts allow-same-origin" 
+                referrerpolicy="no-referrer"
+                allowfullscreen>
+            </iframe>
         </div>
-        <div class="info-card">
-            <div class="info-card-content">
-                <div style="width: 24px; height: 24px; background: #e50914; border-radius: 4px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
-                </div>
-                <div class="card-text">
-                    <h3>TV EN VIVO</h3>
-                    <p>Disfruta nuestra señal de video en directo.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="video-container">
-        <div class="player-wrapper">
-            <iframe src="https://radiosmundiales.com/sanluismas/" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <!-- Botón de actualización -->
-        <button class="refresh-btn" onclick="location.reload();">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
-            ACTUALIZAR SEÑAL
-        </button>
-    </div>
-
-    <nav class="bottom-nav">
-        <button class="tab-btn" onclick="window.location.href='index.html'">RADIO</button>
-        <button class="tab-btn tab-active">VIDEO</button>
-    </nav>
+    </main>
 
 </body>
 </html>
